@@ -1,302 +1,95 @@
-# OFurryBot 🐾 — Base & Mapeamento Oficial da ONU
+# OFurryBot 🐾 — Sistema de Temas & Base Oficial da ONU
 
-**OFurryBot** é o bot e servidor MCP oficial da **Organização das Nações Unidas (ONU)** no Discord. Este documento serve como a **base arquitetural e mapeamento completo** (canais, categorias, ícones, permissões, cargos e emojis) extraído diretamente via **Discord MCP** para referência, automação e replicação.
+**OFurryBot** é o bot e gerenciador de temas sazonais da **Organização das Nações Unidas (ONU)** no Discord (`561721456405381123`).
+
+O sistema foi desenhado de forma **híbrida** (`Markdown + JSON`): cada época do ano possui sua própria pasta em [`themes/`](./themes) com documentação visual (`README.md`) e configuração automatizada (`theme.json`), permitindo trocar o nome do servidor, molduras das categorias, separadores, emojis, nomes de canais e a hierarquia principal de cargos tanto **via IA (Discord MCP)** quanto **via CLI (`bun run theme <nome>`)**.
 
 ![Base da Organização das Nações Unidas](./img/onu-base.png)
 
 ---
 
-## 🌐 1. Informações Gerais dos Servidores
+## 🗂️ 1. Catálogo de Temas (`themes/`)
 
-| Propriedade | Servidor Principal (Base Oficial) | Servidor Secundário (Laboratório/Backup) |
-| :--- | :--- | :--- |
-| **Nome** | `Organização das Nações Unidas` | `ONU` |
-| **Guild ID** | `561721456405381123` | `790382141254795274` |
-| **Owner** | `jcamilo12` | `jcamilo12` |
-| **Criado em** | `2019-03-31` | `2020-12-21` |
-| **Membros** | `102` | `8` |
-| **Ícone (Hash)** | `dba50749a2e628a739d751d8fed9fb9a` | `4d5deb6f20e8724882a0da28db88f116` |
-| **URL do Ícone** | [ CDN Link](https://cdn.discordapp.com/icons/561721456405381123/dba50749a2e628a739d751d8fed9fb9a.png?size=1024) | [ CDN Link](https://cdn.discordapp.com/icons/790382141254795274/4d5deb6f20e8724882a0da28db88f116.png?size=1024) |
-| **Estrutura** | 3 Categorias · 5 Texto · 6 Voz · 48 Cargos · 54 Emojis | 3 Categorias · 8 Texto · 5 Voz · 20 Cargos · 1 Emoji |
+| Tema | Pasta / Docs | Config JSON | Nome do Servidor | Moldura de Categoria | Sep. Canal | Sep. Cargo |
+| :--- | :--- | :--- | :--- | :--- | :---: | :---: |
+| 🌐 **Base Oficial (ONU)** | [`themes/base-onu/README.md`](./themes/base-onu/README.md) | [`theme.json`](./themes/base-onu/theme.json) | `Organização das Nações Unidas` | `▬▬▬▬▬▬  Nome  ▬▬▬▬▬▬` | `│` | `-----------------` |
+| 🎃 **Halloween** | [`themes/halloween/README.md`](./themes/halloween/README.md) | [`theme.json`](./themes/halloween/theme.json) | `Organização das Nações Assombradas 🎃` | `╭─── 🎃 Nome 🎃 ───╮` | `┃` | `─── 🦇 ───` |
+| 🎄 **Natal** | [`themes/natal/README.md`](./themes/natal/README.md) | [`theme.json`](./themes/natal/theme.json) | `Organização das Nações Natalinas 🎄` | `❄️ ═══ Nome ═══ ❄️` | `┇` | `═══ ❄️ ═══` |
+| 🎆 **Ano Novo** | [`themes/ano-novo/README.md`](./themes/ano-novo/README.md) | [`theme.json`](./themes/ano-novo/theme.json) | `Organização das Nações Renovadas 🎆` | `✨ ━━━ Nome ━━━ ✨` | `╏` | `━━━ ✨ ━━━` |
+| 🐰 **Páscoa** | [`themes/pascoa/README.md`](./themes/pascoa/README.md) | [`theme.json`](./themes/pascoa/theme.json) | `Organização das Nações Achocolatadas 🐰` | `🌸 ─── Nome ─── 🌸` | `┆` | `─── 🥚 ───` |
 
----
-
-## 📂 2. Mapeamento de Categorias e Canais (Servidor Principal `561721456405381123`)
-
-> [!IMPORTANT]
-> Os nomes abaixo preservam **exatamente** os caracteres especiais (`▬`, `│`), espaçamentos duplos e emojis originais do servidor para permitir recriação idêntica (`1:1`).
-
-### Visão em Árvore (Layout Visual)
-
-```text
-Organização das Nações Unidas (561721456405381123)
-│
-├── 📁 ▬▬▬▬▬▬  Geral  ▬▬▬▬▬▬ (ID: 794044198881198090)
-│   ├── # 🌍│geral-do-geral       (ID: 794044202803658752) [Pos: 1]
-│   ├── # 🎵│musiquinha           (ID: 794044204488720415) [Pos: 2]
-│   └── # 👋│salve-salve          (ID: 794044207596568628) [Pos: 3] (Somente leitura p/ @everyone)
-│
-├── 📁 ▬▬▬▬▬ Assembleia  ▬▬▬▬▬ (ID: 794044199514406923)
-│   ├── 🔊 🛰️│Central de Voz      (ID: 794044207231926302) [Pos: 5 | 64kbps]
-│   ├── 🔊 🏛️│Supremo Tribunal    (ID: 794044205231112232) [Pos: 6 | 64kbps]
-│   ├── 🔊 🎙️│Palanque Central    (ID: 794044203771363328) [Pos: 7 | 64kbps]
-│   ├── 🔊🔒 🎉│Salão da Festa    (ID: 812400426108452865) [Pos: 8 | 64kbps] (Connect negado p/ @everyone)
-│   └── 🔊🔒 💤│AFK               (ID: 794044208855777322) [Pos: 9 | 64kbps] (Speak negado p/ todos)
-│
-└── 📁 ▬▬▬▬▬ ADM ▬▬▬▬▬ (ID: 794044200756051989) [Privado: Secretariado / Corte Jurídica]
-    ├── #🔒 🤙adm-chat             (ID: 794044213368848396) [Pos: 11 | Topic: "Fizer merda é ban, kkk"]
-    ├── #🔒 📉│chat-falido-de-memes (ID: 794044205848723468) [Pos: 12]
-    └── 🔊🔒 Call Dos Ademar       (ID: 794044216933089320) [Pos: 13 | 64kbps]
-```
-
-### Tabela Detalhada de Canais e Categorias
-
-| Pos | Tipo | Ícone / Trava | Nome Exato (Copiar/Colar) | Channel ID | Categoria Pai (ID) | Configs Extras |
-| :-: | :--- | :---: | :--- | :--- | :--- | :--- |
-| `0` | `CATEGORY` | 📁 | `▬▬▬▬▬▬  Geral  ▬▬▬▬▬▬` | `794044198881198090` | — | Público |
-| `1` | `TEXT` | `# 🌍` | `🌍│geral-do-geral` | `794044202803658752` | `794044198881198090` | Slowmode: `0s`, NSFW: `false` |
-| `2` | `TEXT` | `# 🎵` | `🎵│musiquinha` | `794044204488720415` | `794044198881198090` | Slowmode: `0s`, NSFW: `false` |
-| `3` | `TEXT` | `# 👋` | `👋│salve-salve` | `794044207596568628` | `794044198881198090` | `@everyone` não envia msg |
-| `4` | `CATEGORY` | 📁 | `▬▬▬▬▬ Assembleia  ▬▬▬▬▬` | `794044199514406923` | — | Público |
-| `5` | `VOICE` | `🔊 🛰️` | `🛰️│Central de Voz` | `794044207231926302` | `794044199514406923` | Bitrate: `64000`, Limit: `0` |
-| `6` | `VOICE` | `🔊 🏛️` | `🏛️│Supremo Tribunal` | `794044205231112232` | `794044199514406923` | Bitrate: `64000`, Limit: `0` |
-| `7` | `VOICE` | `🔊 🎙️` | `🎙️│Palanque Central` | `794044203771363328` | `794044199514406923` | Bitrate: `64000`, Limit: `0` |
-| `8` | `VOICE` | `🔊🔒 🎉` | `🎉│Salão da Festa` | `812400426108452865` | `794044199514406923` | Bitrate: `64000`, Limit: `0` (Trancado) |
-| `9` | `VOICE` | `🔊🔒 💤` | `💤│AFK` | `794044208855777322` | `794044199514406923` | Bitrate: `64000`, Limit: `0` (Mudo) |
-| `10` | `CATEGORY` | 📁🔒 | `▬▬▬▬▬ ADM ▬▬▬▬▬` | `794044200756051989` | — | Restrito a ADM/Secretariado |
-| `11` | `TEXT` | `#🔒 🤙` | `🤙adm-chat` | `794044213368848396` | `794044200756051989` | Topic: `Fizer merda é ban, kkk` |
-| `12` | `TEXT` | `#🔒 📉` | `📉│chat-falido-de-memes` | `794044205848723468` | `794044200756051989` | Restrito a `Secretariado` |
-| `13` | `VOICE` | `🔊🔒` | `Call Dos Ademar` | `794044216933089320` | `794044200756051989` | Bitrate: `64000`, Limit: `0` |
+> [!TIP]
+> O mapeamento bruto completo de segurança (com todos os **48 cargos**, **permissões bitmask**, **54 emojis** e dados do servidor secundário) está salvo em:
+> 📄 **[`docs/full-server-mapping.md`](./docs/full-server-mapping.md)**
 
 ---
 
-## 🔐 3. Mapeamento de Permissões (Overwrites por Canal/Categoria)
+## 🔄 2. Matriz Comparativa de Canais por Tema (IDs Fixos)
 
-| Canal / Categoria | Cargo (Role) | Allow (Permitido) | Deny (Negado) |
-| :--- | :--- | :--- | :--- |
-| **📁 `▬▬▬▬▬▬  Geral  ▬▬▬▬▬▬`** | `@everyone` | `View Channels`, `Create Instant Invite`, `Send Messages`, `Manage Messages`, `Read History` (`6755399441132545`) | — |
-| | `Orion Mute` | — | `Add Reactions`, `Send Messages`, `Connect`, `Speak` (`3147840`) |
-| **`# 🌍│geral-do-geral`** | `@everyone` | `View Channels`, `Create Instant Invite`, `Send Messages`, `Manage Messages`, `Read History` (`6755399441132545`) | — |
-| | `Orion Mute` | — | `Add Reactions`, `Send Messages`, `Connect`, `Speak` (`3147840`) |
-| **`# 🎵│musiquinha`** | `@everyone` | `View Channels`, `Create Instant Invite`, `Send Messages`, `Manage Messages` (`6755399441067009`) | — |
-| | `Orion Mute` | — | `Add Reactions`, `Send Messages`, `Connect`, `Speak` (`3147840`) |
-| **`# 👋│salve-salve`** | `@everyone` | `View Channels`, `Read History` (`66560`) | `Send Messages`, `Send TTS Messages` (`6144`) |
-| | `Corpo Diplomático` | `View Channels`, `Connect` (`1049600`) | — |
-| | `Assembleia Geral` | `View Channels`, `Connect` (`1049600`) | — |
-| | `Orion Mute` | — | `Add Reactions`, `Send Messages`, `Connect`, `Speak` (`3147840`) |
-| **📁 `▬▬▬▬▬ Assembleia  ▬▬▬▬▬`** | `@everyone` | `View Channels`, `Video`, `Connect` (`1050112`) | — |
-| | `Assembleia Geral` | `View Channels`, `Connect` (`1049600`) | — |
-| | `Orion Mute` | — | `Add Reactions`, `Send Messages`, `Connect`, `Speak` (`3147840`) |
-| **`🔊 🛰️│Central de Voz`** | `@everyone` | `View Channels`, `Video`, `Connect` (`1050112`) | — |
-| | `Assembleia Geral` | `View Channels`, `Video`, `Connect`, `Speak` (`3147264`) | — |
-| | `Orion Mute` | — | `Add Reactions`, `Send Messages`, `Connect`, `Speak` (`3147840`) |
-| **`🔊 🏛️│Supremo Tribunal`** | `@everyone` | `View Channels`, `Video`, `Connect` (`1050112`) | — |
-| | `Assembleia Geral` | `View Channels`, `Connect` (`1049600`) | — |
-| | `Orion Mute` | — | `Add Reactions`, `Send Messages`, `Connect`, `Speak` (`3147840`) |
-| **`🔊 🎙️│Palanque Central`** | `@everyone` | `View Channels`, `Video`, `Connect` (`1050112`) | — |
-| | `Assembleia Geral` | `View Channels`, `Connect` (`1049600`) | — |
-| | `Orion Mute` | — | `Add Reactions`, `Send Messages`, `Connect`, `Speak` (`3147840`) |
-| **`🔊🔒 🎉│Salão da Festa`** | `@everyone` | `Video` (`512`) | `Connect` (`1048576`) |
-| | `Orion Mute` | — | `Add Reactions`, `Send Messages`, `Connect`, `Speak` (`3147840`) |
-| **`🔊🔒 💤│AFK`** | `@everyone` | — | `Priority Speaker`, `Speak`, `Use Voice Activity` (`35651840`) |
-| | `Secretariado` | — | `Speak` (`2097152`) |
-| | `Orion Mute` | — | `Add Reactions`, `Send Messages`, `Connect`, `Speak` (`3147840`) |
-| **📁 `▬▬▬▬▬ ADM ▬▬▬▬▬`** | `@everyone` | — | `View Channels`, `Connect` (`1049600`) |
-| | `Secretariado` | `View Channels`, `Connect` (`1049600`) | — |
-| | `Orion Mute` | — | `Add Reactions`, `Send Messages`, `Connect`, `Speak` (`3147840`) |
-| **`#🔒 🤙adm-chat`** | `@everyone` | — | `View Channels`, `Connect` (`1049600`) |
-| | `Secretariado` | `View Channels`, `Connect` (`1049600`) | — |
-| | `Corte Jurídica` | `View Channels`, `Connect` (`1049600`) | — |
-| | `Orion Mute` | — | `Add Reactions`, `Send Messages`, `Connect`, `Speak` (`3147840`) |
-| **`#🔒 📉│chat-falido-de-memes`** | `@everyone` | — | `View Channels`, `Connect` (`1049600`) |
-| | `Secretariado` | `View Channels`, `Connect` (`1049600`) | — |
-| | `Orion Mute` | — | `Add Reactions`, `Send Messages`, `Connect`, `Speak` (`3147840`) |
-| **`🔊🔒 Call Dos Ademar`** | `@everyone` | — | `View Channels`, `Connect` (`1049600`) |
-| | `Secretariado` | `View Channels`, `Connect` (`1049600`) | — |
-| | `Corte Jurídica` | `View Channels`, `Connect` (`1049600`) | — |
-| | `Orion Mute` | — | `Add Reactions`, `Send Messages`, `Connect`, `Speak` (`3147840`) |
+Todos os temas mapeiam exatamente os **mesmos 14 canais/categorias** através de seus IDs fixos no Discord:
+
+| Tipo | ID Fixo | 🌐 Base ONU | 🎃 Halloween | 🎄 Natal | 🎆 Ano Novo | 🐰 Páscoa |
+| :---: | :--- | :--- | :--- | :--- | :--- | :--- |
+| 📁 | `794044198881198090` | `▬▬▬▬▬▬  Geral  ▬▬▬▬▬▬` | `╭─── 🎃 Cripta Geral 🎃 ───╮` | `❄️ ═══ Vila do Noel ═══ ❄️` | `✨ ━━━ Réveillon Geral ━━━ ✨` | `🌸 ─── Toca Geral ─── 🌸` |
+| `#` | `794044202803658752` | `🌍│geral-do-geral` | `🕸️┃geral-do-além` | `🎄┇ceia-geral` | `🥂╏brinde-geral` | `🥚┆caça-aos-ovos` |
+| `#` | `794044204488720415` | `🎵│musiquinha` | `🎻┃sinfonia-macabra` | `🔔┇jingle-bells` | `🎶╏playlist-da-virada` | `🎵┆cantiga-do-coelho` |
+| `#` | `794044207596568628` | `👋│salve-salve` | `🪦┃novas-almas` | `🎁┇cartinhas-pro-noel` | `🎇╏novos-ciclos` | `🐣┆novos-coelhinhos` |
+| 📁 | `794044199514406923` | `▬▬▬▬▬ Assembleia  ▬▬▬▬▬` | `╭── 💀 Seita Suprema 💀 ──╮` | `🎄 ═══ Polo Norte ═══ 🎄` | `🎆 ━━━ Cúpula da Virada ━━━ 🎆` | `🍫 ─── Fábrica de Cacau ─── 🍫` |
+| `🔊` | `794044207231926302` | `🛰️│Central de Voz` | `🕯️┃Câmara das Sombras` | `🛷┇Trenó Central` | `🎆╏Praia de Copacabana` | `🐰┆Toca Central` |
+| `🔊` | `794044205231112232` | `🏛️│Supremo Tribunal` | `⚰️┃Tribunal da Inquisição` | `📜┇Lista dos Bons e Maus` | `⚖️╏Retrospectiva do Ano` | `🍫┆Conselho do Cacau` |
+| `🔊` | `794044203771363328` | `🎙️│Palanque Central` | `🔮┃Altar do Ritual` | `⭐┇Chaminé Central` | `⏳╏Contagem Regressiva` | `🥕┆Jardim Central` |
+| `🔊🔒` | `812400426108452865` | `🎉│Salão da Festa` | `🎃┃Baile dos Vampiros` | `🍗┇Ceia de Natal` | `🍾╏After da Virada` | `🍬┆Banquete de Chocolate` |
+| `🔊🔒` | `794044208855777322` | `💤│AFK` | `🧟┃Cemitério AFK` | `⛄┇Boneco Congelado AFK` | `🥴╏Ressaca AFK` | `🧺┆Coma Glicêmico AFK` |
+| 📁🔒 | `794044200756051989` | `▬▬▬▬▬ ADM ▬▬▬▬▬` | `╭─── 🩸 Submundo ADM 🩸 ───╮` | `🦌 ═══ Oficina ADM ═══ 🦌` | `🥂 ━━━ Camarote ADM ━━━ 🥂` | `🥚 ─── Cofre de Ouro ADM ─── 🥚` |
+| `#🔒` | `794044213368848396` | `🤙adm-chat` | `🩸┃pacto-adm` | `🎅┇conselho-do-noel` | `🍾╏vip-adm` | `🍫┆willy-wonka-adm` |
+| `#🔒` | `794044205848723468` | `📉│chat-falido-de-memes` | `👻┃memes-amaldiçoados` | `🧦┇meia-de-memes` | `📉╏retrospectiva-de-memes` | `🐰┆memes-recheados` |
+| `🔊🔒` | `794044216933089320` | `Call Dos Ademar` | `🦇┃Covil dos Ademar` | `🦌┇Estábulo dos Ademar` | `🥂╏Camarote dos Ademar` | `🥚┆Toca dos Ademar` |
 
 ---
 
-## 🛡️ 4. Mapeamento Completo de Cargos (48 Roles na ONU `561721456405381123`)
+## 🛡️ 3. Matriz Comparativa da Hierarquia Principal de Cargos
 
-### Resumo dos Cargos Estruturais / Diplomáticos (Hoisted / Principais)
-- **Hierarquia Principal (Destacados na barra lateral - `Hoisted: true`)**:
-  1. `Secretariado` (Pos 38) — Topo da hierarquia diplomática visível
-  2. `Corte Jurídica` (Pos 29) — Segundo escalão diplomático/moderação
-  3. `Amém` (Pos 26) — Cargo destacado especial (`#FFFCFC`)
-  4. `Jogador de Gayshit🤮🤮🤮🤡🤡` (Pos 13) — Cargo destacado zoeira
-  5. `Corpo Diplomático` (Pos 5 | `#95A5A6`) — Membros diplomáticos
-  6. `Assembleia Geral` (Pos 4 | `#1ABC9C`) — Membros gerais da Assembleia
-- **Separadores Visuais**: `-----------------` nas posições `45`, `39`, `30` e `6`.
+Apenas os **4 cargos da Hierarquia Principal** e os **4 separadores visuais** mudam a cada evento (todos os outros ~30 cargos customizados/zoeira permanecem intocados):
 
-### Tabela Completa de Todos os 48 Cargos (Ordem Hierárquica)
-
-| Pos | Nome do Cargo | Role ID | Cor Hex | RGB | Hoisted (Destacado) | Mentionable | Permissions (Bitmask) | Categoria / Tipo |
-| :-: | :--- | :--- | :---: | :---: | :---: | :---: | :--- | :--- |
-| `46` | `ADM` | `900181942983622736` | `None` | `536870911` | ❌ | ❌ | `4294967304` | Admin (`Administrator`) |
-| `45` | `-----------------` | `900181759507968031` | `None` | `536870911` | ❌ | ❌ | `1071627896832` | Separador Visual |
-| `44` | `Xenon` | `738439202269823108` | `None` | `536870911` | ❌ | ❌ | `8` | Bot Role |
-| `43` | `Orion Mute` | `866735906849161227` | `None` | `536870911` | ❌ | ❌ | `0` | Moderação / Mute |
-| `42` | `Loritta` | `561725393451745300` | `None` | `536870911` | ❌ | ❌ | `4512397800767679` | Bot Role |
-| `41` | `Dyno` | `880610908957736971` | `None` | `536870911` | ❌ | ❌ | `1513962695871` | Bot Role |
-| `40` | `Oficiais` | `767772911112028181` | `None` | `536870911` | ❌ | ❌ | `8` | Admin (`Administrator`) |
-| `39` | `-----------------` | `845826404380835841` | `None` | `536870911` | ❌ | ❌ | `0` | Separador Visual |
-| `38` | `Secretariado` | `794044179029819392` | `None` | `536870911` | ✅ | ❌ | `6782320278765307` | Hierarquia ONU (Topo) |
-| `37` | `ADM` | `957720003594059776` | `#E67E22` | `15105570` | ❌ | ❌ | `1071627897856` | Admin / Tag Cor |
-| `36` | `Mandrake` | `794044182020096020` | `#E74C3C` | `15158332` | ❌ | ❌ | `0` | Cargo Customizado |
-| `35` | `Crente` | `818916995252092938` | `#E91E63` | `15277667` | ❌ | ❌ | `0` | Cargo Customizado |
-| `34` | `Top 3 no kart da empresa 🤙🤙` | `819241064950267944` | `#19859C` | `1672604` | ❌ | ✅ | `0` | Cargo Customizado |
-| `33` | `Fanboy de Gintama` | `854369905418567701` | `#E67E22` | `15105570` | ❌ | ❌ | `109555222528` | Cargo Customizado |
-| `32` | `Ragebaiter` | `1459964959701078275` | `#79D7FD` | `7985149` | ❌ | ❌ | `0` | Cargo Customizado |
-| `31` | `Gostosin` | `794044180635582465` | `#010000` | `65536` | ❌ | ❌ | `0` | Cargo Customizado |
-| `30` | `-----------------` | `854712377982976010` | `None` | `536870911` | ❌ | ❌ | `109555222528` | Separador Visual |
-| `29` | `Corte Jurídica` | `845826535810269225` | `None` | `536870911` | ✅ | ❌ | `6783918023376593` | Hierarquia ONU |
-| `28` | `Garoto de Programa de Luxo` | `1239683781686857748` | `#E91E63` | `15277667` | ❌ | ❌ | `0` | Cargo Customizado |
-| `27` | `Colono exadada` | `906512032382214144` | `#206694` | `2123412` | ❌ | ❌ | `1071627896832` | Cargo Customizado |
-| `26` | `Amém` | `870463624823570524` | `#FFFCFC` | `16776444` | ✅ | ❌ | `246994176000` | Cargo Destacado |
-| `25` | `General` | `877706340833820692` | `#9DDD99` | `10345881` | ❌ | ❌ | `521872082944` | Cargo Customizado |
-| `24` | `Sábio` | `877705549540626472` | `#9B59B6` | `10181046` | ❌ | ❌ | `521872082944` | Cargo Customizado |
-| `23` | `Batedor de Carteado` | `794044180351549461` | `#1ABC9C` | `1752220` | ❌ | ❌ | `0` | Cargo Customizado |
-| `22` | `Comedor De Casadas` | `904810944427868200` | `#E91E63` | `15277667` | ❌ | ❌ | `1071627896832` | Cargo Customizado |
-| `21` | `2D` | `794044186952466474` | `#206694` | `2123412` | ❌ | ❌ | `0` | Cargo Customizado |
-| `20` | `DEUS VITÃO` | `794044187430748161` | `#C7B133` | `13087027` | ❌ | ❌ | `0` | Cargo Customizado |
-| `19` | `PT` | `904710864756690954` | `#FC0303` | `16515843` | ❌ | ❌ | `1071627896832` | Cargo Customizado |
-| `18` | `Senpai` | `966725547621228604` | `#408F5A` | `4231002` | ❌ | ❌ | `1071627896832` | Cargo Customizado |
-| `17` | `Rato Aquático` | `966725537198407750` | `#BC2E25` | `12332581` | ❌ | ❌ | `1071627896832` | Cargo Customizado |
-| `16` | `As Gurias` | `1044043802324766842` | `#DF2493` | `14623891` | ❌ | ❌ | `1071627896832` | Cargo Customizado |
-| `15` | `Ta pegando Fogo Bixo` | `1436851818436231198` | `#FF0000` | `16711680` | ❌ | ❌ | `0` | Cargo Customizado |
-| `14` | `LoiraGostosa` | `1507929418423734344` | `#F1C40F` | `15844367` | ❌ | ❌ | `0` | Cargo Customizado |
-| `13` | `Jogador de Gayshit🤮🤮🤮🤡🤡` | `1357499683601125548` | `None` | `536870911` | ✅ | ✅ | `0` | Cargo Destacado |
-| `12` | `Pri Player` | `995790354634788935` | `#C56767` | `12937063` | ❌ | ❌ | `1071627896832` | Cargo Customizado |
-| `11` | `Jogador de Ark💩💩💩` | `1357499106691514388` | `#2ECC71` | `3066993` | ❌ | ❌ | `0` | Cargo Customizado |
-| `10` | `Allahu Akbar` | `1201957347740893234` | `#F1C40F` | `15844367` | ❌ | ❌ | `0` | Cargo Customizado |
-| `9` | `éOStagi` | `1532936652257755256` | `#0A0505` | `656645` | ❌ | ❌ | `0` | Cargo Customizado |
-| `8` | `Gorodo` | `1485390103390978201` | `#9B59B6` | `10181046` | ❌ | ❌ | `0` | Cargo Customizado |
-| `7` | `Server Booster` | `786554804963901462` | `#F353CA` | `15946698` | ❌ | ❌ | `0` | Sistema (Booster) |
-| `6` | `-----------------` | `794044188408283217` | `None` | `536870911` | ❌ | ❌ | `0` | Separador Visual |
-| `5` | `Corpo Diplomático` | `794044189042147340` | `#95A5A6` | `9807270` | ✅ | ❌ | `8941840223809` | Hierarquia ONU |
-| `4` | `Assembleia Geral` | `794044191951945778` | `#1ABC9C` | `1752220` | ✅ | ❌ | `6546640449` | Hierarquia ONU (Base) |
-| `3` | `Hydra` | `1043677923854532630` | `None` | `536870911` | ❌ | ❌ | `6755399478144344` | Bot Role |
-| `2` | `Euphony` | `1480025901079986241` | `None` | `536870911` | ❌ | ❌ | `20204552` | Bot Role |
-| `1` | `Jockie Music` | `1480026205230072009` | `None` | `536870911` | ❌ | ❌ | `8` | Bot Role |
-| `0` | `FurryBOT` | `1562260850071314506` | `None` | `536870911` | ❌ | ❌ | `8` | Bot Oficial (`OFurryBot`) |
-| `-1` | `@everyone` | `561721456405381123` | `None` | `536870911` | ❌ | ❌ | `2222085116004352` | Padrão |
+| Escalão | Role ID | 🌐 Base ONU | 🎃 Halloween | 🎄 Natal | 🎆 Ano Novo | 🐰 Páscoa |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **Tier 1 (Pos 38)** | `794044179029819392` | `Secretariado` (`#5B92E5`) | `🎃 Lordes das Sombras` (`#FF6B00`) | `🎅 Conselho do Bom Velhinho` (`#D62828`) | `🎆 Soberanos do Novo Ciclo` (`#FFD700`) | `🍫 Mestres Chocolatiers` (`#A0522D`) |
+| **Tier 2 (Pos 29)** | `845826535810269225` | `Corte Jurídica` (`#F1C40F`) | `💀 Inquisidores Supremos` (`#9B59B6`) | `⭐ Guardiões da Estrela Guia` (`#F7B801`) | `🥂 Guardiões do Tempo` (`#F4A261`) | `🥚 Guardiões do Ovo Dourado` (`#FFD166`) |
+| **Tier 3 (Pos 5)** | `794044189042147340` | `Corpo Diplomático` (`#95A5A6`) | `🧛 Emissários Noturnos` (`#C0392B`) | `🦌 Embaixadores do Polo Norte` (`#2A9D8F`) | `✨ Embaixadores da Virada` (`#90E0EF`) | `🐰 Embaixadores da Toca` (`#FF85A1`) |
+| **Tier 4 (Pos 4)** | `794044191951945778` | `Assembleia Geral` (`#1ABC9C`) | `👻 Almas da Assembleia` (`#2ECC71`) | `🧝 Duendes da Assembleia` (`#52B788`) | `🎇 Cidadãos do Novo Ano` (`#E0FBFC`) | `🐣 Coelhinhos da Assembleia` (`#80ED99`) |
+| **Separadores (x4)** | `900181759507968031` etc. | `-----------------` | `─── 🦇 ───` | `═══ ❄️ ═══` | `━━━ ✨ ━━━` | `─── 🥚 ───` |
 
 ---
 
-## 😀 5. Mapeamento de Emojis Customizados (54 Emojis na ONU `561721456405381123`)
+## 🚀 4. Como Aplicar um Tema (Modo Híbrido)
 
-| Nome | Emoji ID | Animado | Sintaxe Discord | URL Direta (CDN) |
-| :--- | :--- | :---: | :--- | :--- |
-| `JCcarioca` | `569335951088680980` | ❌ | `<:JCcarioca:569335951088680980>` | [PNG](https://cdn.discordapp.com/emojis/569335951088680980.png) |
-| `COMUNISMO` | `655812796692561920` | ❌ | `<:COMUNISMO:655812796692561920>` | [PNG](https://cdn.discordapp.com/emojis/655812796692561920.png) |
-| `BECKDORMINDO` | `655814470043697367` | ❌ | `<:BECKDORMINDO:655814470043697367>` | [PNG](https://cdn.discordapp.com/emojis/655814470043697367.png) |
-| `SAD` | `655814891914919936` | ❌ | `<:SAD:655814891914919936>` | [PNG](https://cdn.discordapp.com/emojis/655814891914919936.png) |
-| `XISUM` | `655815331834626058` | ❌ | `<:XISUM:655815331834626058>` | [PNG](https://cdn.discordapp.com/emojis/655815331834626058.png) |
-| `OOF` | `655816697927827457` | ❌ | `<:OOF:655816697927827457>` | [PNG](https://cdn.discordapp.com/emojis/655816697927827457.png) |
-| `MONOYASUOHIGHELO` | `658109323691556884` | ❌ | `<:MONOYASUOHIGHELO:658109323691556884>` | [PNG](https://cdn.discordapp.com/emojis/658109323691556884.png) |
-| `JCDISNEY` | `672857900984827915` | ❌ | `<:JCDISNEY:672857900984827915>` | [PNG](https://cdn.discordapp.com/emojis/672857900984827915.png) |
-| `acheiiz` | `681897232672227375` | ❌ | `<:acheiiz:681897232672227375>` | [PNG](https://cdn.discordapp.com/emojis/681897232672227375.png) |
-| `beckcomendo` | `691753369391333406` | ❌ | `<:beckcomendo:691753369391333406>` | [PNG](https://cdn.discordapp.com/emojis/691753369391333406.png) |
-| `BECKOFEDIDO` | `692959999219204116` | ❌ | `<:BECKOFEDIDO:692959999219204116>` | [PNG](https://cdn.discordapp.com/emojis/692959999219204116.png) |
-| `pornodojc` | `692963040534200340` | ❌ | `<:pornodojc:692963040534200340>` | [PNG](https://cdn.discordapp.com/emojis/692963040534200340.png) |
-| `cowboydobeck` | `692963438795685898` | ❌ | `<:cowboydobeck:692963438795685898>` | [PNG](https://cdn.discordapp.com/emojis/692963438795685898.png) |
-| `JCSOCORRO` | `693281209693765726` | ❌ | `<:JCSOCORRO:693281209693765726>` | [PNG](https://cdn.discordapp.com/emojis/693281209693765726.png) |
-| `FBI` | `697632120712986776` | ❌ | `<:FBI:697632120712986776>` | [PNG](https://cdn.discordapp.com/emojis/697632120712986776.png) |
-| `BOTEI` | `697632370446041179` | ❌ | `<:BOTEI:697632370446041179>` | [PNG](https://cdn.discordapp.com/emojis/697632370446041179.png) |
-| `yareyaredaze` | `697633570302459974` | ❌ | `<:yareyaredaze:697633570302459974>` | [PNG](https://cdn.discordapp.com/emojis/697633570302459974.png) |
-| `sansrindo` | `697634367983452160` | ❌ | `<:sansrindo:697634367983452160>` | [PNG](https://cdn.discordapp.com/emojis/697634367983452160.png) |
-| `KONODIODA` | `697635133200793650` | ❌ | `<:KONODIODA:697635133200793650>` | [PNG](https://cdn.discordapp.com/emojis/697635133200793650.png) |
-| `bota` | `697636218292404324` | ❌ | `<:bota:697636218292404324>` | [PNG](https://cdn.discordapp.com/emojis/697636218292404324.png) |
-| `EUTOTILTADOCARA` | `697637688035246110` | ❌ | `<:EUTOTILTADOCARA:697637688035246110>` | [PNG](https://cdn.discordapp.com/emojis/697637688035246110.png) |
-| `HMM` | `697638976298942494` | ❌ | `<:HMM:697638976298942494>` | [PNG](https://cdn.discordapp.com/emojis/697638976298942494.png) |
-| `dorime` | `697653519397945344` | ❌ | `<:dorime:697653519397945344>` | [PNG](https://cdn.discordapp.com/emojis/697653519397945344.png) |
-| `Dolime` | `697658065268244609` | ❌ | `<:Dolime:697658065268244609>` | [PNG](https://cdn.discordapp.com/emojis/697658065268244609.png) |
-| `OCRIME` | `699363254115237900` | ❌ | `<:OCRIME:699363254115237900>` | [PNG](https://cdn.discordapp.com/emojis/699363254115237900.png) |
-| `MorteAosFurri` | `714322184314814544` | ❌ | `<:MorteAosFurri:714322184314814544>` | [PNG](https://cdn.discordapp.com/emojis/714322184314814544.png) |
-| `LULUJOSE` | `720755948775407669` | ❌ | `<:LULUJOSE:720755948775407669>` | [PNG](https://cdn.discordapp.com/emojis/720755948775407669.png) |
-| `skate` | `726276997998837760` | ❌ | `<:skate:726276997998837760>` | [PNG](https://cdn.discordapp.com/emojis/726276997998837760.png) |
-| `Aaerodinmicadeumavaca` | `726278011921629254` | ❌ | `<:Aaerodinmicadeumavaca:726278011921629254>` | [PNG](https://cdn.discordapp.com/emojis/726278011921629254.png) |
-| `obrad` | `734910073599557764` | ❌ | `<:obrad:734910073599557764>` | [PNG](https://cdn.discordapp.com/emojis/734910073599557764.png) |
-| `fuedase` | `757011995802206299` | ❌ | `<:fuedase:757011995802206299>` | [PNG](https://cdn.discordapp.com/emojis/757011995802206299.png) |
-| `claudio` | `757018786753675325` | ❌ | `<:claudio:757018786753675325>` | [PNG](https://cdn.discordapp.com/emojis/757018786753675325.png) |
-| `ERNESTO` | `761073612190384169` | ❌ | `<:ERNESTO:761073612190384169>` | [PNG](https://cdn.discordapp.com/emojis/761073612190384169.png) |
-| `cu` | `763025885665689600` | ❌ | `<:cu:763025885665689600>` | [PNG](https://cdn.discordapp.com/emojis/763025885665689600.png) |
-| `PequenoDarlinho` | `772136985150226503` | ❌ | `<:PequenoDarlinho:772136985150226503>` | [PNG](https://cdn.discordapp.com/emojis/772136985150226503.png) |
-| `BongoAsol` | `788546543099445268` | ✅ | `<a:BongoAsol:788546543099445268>` | [GIF](https://cdn.discordapp.com/emojis/788546543099445268.gif) |
-| `Evandro` | `792623814294241281` | ❌ | `<:Evandro:792623814294241281>` | [PNG](https://cdn.discordapp.com/emojis/792623814294241281.png) |
-| `ban2` | `794444019547504651` | ✅ | `<a:ban2:794444019547504651>` | [GIF](https://cdn.discordapp.com/emojis/794444019547504651.gif) |
-| `emoji2` | `794632957914513429` | ✅ | `<a:emoji2:794632957914513429>` | [GIF](https://cdn.discordapp.com/emojis/794632957914513429.gif) |
-| `emoji3` | `794633064679735306` | ✅ | `<a:emoji3:794633064679735306>` | [GIF](https://cdn.discordapp.com/emojis/794633064679735306.gif) |
-| `fidgetspinner` | `794633177145540639` | ✅ | `<a:fidgetspinner:794633177145540639>` | [GIF](https://cdn.discordapp.com/emojis/794633177145540639.gif) |
-| `Pvzl14` | `794633265230512159` | ✅ | `<a:Pvzl14:794633265230512159>` | [GIF](https://cdn.discordapp.com/emojis/794633265230512159.gif) |
-| `Pvzl50` | `794633335425990677` | ✅ | `<a:Pvzl50:794633335425990677>` | [GIF](https://cdn.discordapp.com/emojis/794633335425990677.gif) |
-| `Pvzl12` | `794633384436564048` | ✅ | `<a:Pvzl12:794633384436564048>` | [GIF](https://cdn.discordapp.com/emojis/794633384436564048.gif) |
-| `Pvzl23` | `794633508743675912` | ✅ | `<a:Pvzl23:794633508743675912>` | [GIF](https://cdn.discordapp.com/emojis/794633508743675912.gif) |
-| `Pvzl51` | `794633533346807853` | ✅ | `<a:Pvzl51:794633533346807853>` | [GIF](https://cdn.discordapp.com/emojis/794633533346807853.gif) |
-| `ahegao` | `805997754731331624` | ❌ | `<:ahegao:805997754731331624>` | [PNG](https://cdn.discordapp.com/emojis/805997754731331624.png) |
-| `davi` | `811727107277062215` | ❌ | `<:davi:811727107277062215>` | [PNG](https://cdn.discordapp.com/emojis/811727107277062215.png) |
-| `miss` | `820047013374722068` | ❌ | `<:miss:820047013374722068>` | [PNG](https://cdn.discordapp.com/emojis/820047013374722068.png) |
-| `JaMetiaRola` | `827163962234634270` | ❌ | `<:JaMetiaRola:827163962234634270>` | [PNG](https://cdn.discordapp.com/emojis/827163962234634270.png) |
-| `JaMetiaRola20` | `827169372782198794` | ❌ | `<:JaMetiaRola20:827169372782198794>` | [PNG](https://cdn.discordapp.com/emojis/827169372782198794.png) |
-| `EMPANADAS` | `839646578612240414` | ❌ | `<:EMPANADAS:839646578612240414>` | [PNG](https://cdn.discordapp.com/emojis/839646578612240414.png) |
-| `FLAMENGO` | `973686265536987176` | ❌ | `<:FLAMENGO:973686265536987176>` | [PNG](https://cdn.discordapp.com/emojis/973686265536987176.png) |
-| `cat` | `1449244377774817362` | ❌ | `<:cat:1449244377774817362>` | [PNG](https://cdn.discordapp.com/emojis/1449244377774817362.png) |
+### Opção A: Pedindo direto para a IA (Via Discord MCP)
+Basta pedir no chat do Antigravity:
+> *"Aplica o tema `halloween` no servidor da ONU usando o MCP"*
+> *"Restaura o servidor para a `base-onu`"*
+
+A IA lerá automaticamente o arquivo `themes/<tema>/theme.json` e executará as ferramentas do `discord-mcp`.
+
+### Opção B: Via Script CLI (`Bun`)
+1. Configure seu `.env` a partir do [`.env.example`](./.env.example).
+2. Liste os temas disponíveis:
+   ```bash
+   bun run theme:list
+   ```
+3. Simule um tema sem alterar nada no Discord (`--dry-run`):
+   ```bash
+   bun run theme:dry halloween
+   ```
+4. Aplique o tema em produção:
+   ```bash
+   bun run theme halloween
+   # Ou para voltar ao padrão:
+   bun run theme base-onu
+   ```
 
 ---
 
-## 🏛️ 6. Mapeamento do Servidor Secundário (`ONU` — ID: `790382141254795274`)
-
-### Canais Atuais no Servidor Secundário
-- **📁 `╭────── Geral ───────╮`** (`791071510731292682`)
-  - `# geral-do-geral` (`791071460487331840`)
-  - `# cartas` (`791071610538295296`)
-  - `# menes-tipos-de-carinhas-são` (`791071735884677161`)
-  - `# doces-ou-travessuras` (`791071905817165875`)
-  - `# eventos` (`1484969768942440639`)
-  - `# eventos-pascoa` (`1487228811530731590`)
-- **📁 `▬▬▬▬ Assembleia  ▬▬▬▬`** (`791072033152565258`)
-  - `🔊 Geral` (`791074075980070934`)
-  - `🔊 Conselho Economico` (`791072492034588753`)
-  - `🔊 Conselho De Segurança` (`791073055220301834`)
-  - `🔊 Limpando Teias De Aranha` (`791072294838730752`)
-  - `🔊 Festinha` (`791072406734897183`)
-- **📁 `backup onu antiga`** (`792506029710508043`)
-  - `# backup` (`792506430279778314`)
-  - `# ai-generate` (`1088065722829246525`)
-
-### Cargos Atuais no Servidor Secundário (`790382141254795274`)
-| Pos | Nome | Role ID | Cor Hex | Hoisted | Permissions |
-| :-: | :--- | :--- | :---: | :---: | :--- |
-| `18` | `<3` | `791065399767990293` | `None` | ✅ | `6442450952` |
-| `17` | `Representantes` | `791065400388616213` | `None` | ✅ | `6442450952` |
-| `16` | `Dos Anão` | `791065393660690524` | `#F1C40F` | ❌ | `6442450944` |
-| `15` | `Dos Loli` | `791065395553370142` | `#CC561E` | ❌ | `6442450944` |
-| `14` | `Dos Gordin` | `791065394784895059` | `#010000` | ❌ | `6442450944` |
-| `13` | `-------------------------` | `791065398594371594` | `None` | ❌ | `6442450944` |
-| `12` | `-------------------------` | `791106316117868555` | `None` | ❌ | `6442450944` |
-| `11` | `Cara Sem (S e S+) No LOL` | `791065399299014686` | `#00FF20` | ❌ | `6442450944` |
-| `10` | `Fãboi De HxH` | `791065396262338610` | `#DA3B15` | ❌ | `6442450944` |
-| `9` | `Felpinhos Gameplays` | `791065396962263050` | `#EF2551` | ❌ | `6442450944` |
-| `8` | `---` | `791110458189807646` | `#2ECC71` | ❌ | `6442450944` |
-| `7` | `-------------------------` | `791065401227739167` | `None` | ❌ | `6442450944` |
-| `6` | `Feministas` | `791065405048881162` | `#CD1164` | ✅ | `8804132843201` |
-| `5` | `Diplomatas` | `791065405736091659` | `#1F8B4C` | ✅ | `6546640449` |
-| `4` | `Principiantes` | `791065408358318100` | `#897F7F` | ✅ | `6546377792` |
-| `3` | `Fica Quietinho Aí` | `791111090918260758` | `#DF4444` | ❌ | `6479151104` |
-| `2` | `Hydra` | `1043677754383675445` | `None` | ❌ | `37088600` |
-| `1` | `Midjourney Bot` | `1088064996598095962` | `None` | ❌ | `2147601472` |
-| `0` | `FurryBOT` | `1562261935976878196` | `None` | ❌ | `8` |
-| `-1` | `@everyone` | `790382141254795274` | `None` | ❌ | `2248473395070976` |
-
----
-
-## 🔌 7. Configuração do MCP (Model Context Protocol)
-
-O bot roda como um servidor MCP via `discord-mcp-1.0.0.jar` permitindo controle total do Discord via IA.
-
-### Configuração no `mcp_config.json` (`~/.gemini/config/mcp_config.json`)
+## 🔌 5. Configuração do Servidor MCP (`mcp_config.json`)
 
 ```json
 {

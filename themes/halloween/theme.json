@@ -1,0 +1,173 @@
+{
+  "id": "halloween",
+  "name": "Halloween (Noite das Bruxas)",
+  "description": "Tema sombrio e assombrado de Halloween com estética gótica, abóboras e necromancia diplomática.",
+  "guildId": "561721456405381123",
+  "server": {
+    "name": "Organização das Nações Assombradas 🎃",
+    "icon": "./assets/icon.png"
+  },
+  "style": {
+    "categoryFrame": "╭─── 🎃 {name} 🎃 ───╮",
+    "channelSeparator": "┃",
+    "roleSeparator": "─── 🦇 ───"
+  },
+  "categories": [
+    {
+      "id": "794044198881198090",
+      "slot": "geral",
+      "name": "╭─── 🎃 Cripta Geral 🎃 ───╮",
+      "position": 0
+    },
+    {
+      "id": "794044199514406923",
+      "slot": "assembleia",
+      "name": "╭── 💀 Seita Suprema 💀 ──╮",
+      "position": 4
+    },
+    {
+      "id": "794044200756051989",
+      "slot": "adm",
+      "name": "╭─── 🩸 Submundo ADM 🩸 ───╮",
+      "position": 10
+    }
+  ],
+  "channels": [
+    {
+      "id": "794044202803658752",
+      "slot": "geral-chat",
+      "type": "TEXT",
+      "categoryId": "794044198881198090",
+      "name": "🕸️┃geral-do-além",
+      "topic": "Doces ou travessuras na Assembleia Assombrada 🎃"
+    },
+    {
+      "id": "794044204488720415",
+      "slot": "musica",
+      "type": "TEXT",
+      "categoryId": "794044198881198090",
+      "name": "🎻┃sinfonia-macabra",
+      "topic": ""
+    },
+    {
+      "id": "794044207596568628",
+      "slot": "boas-vindas",
+      "type": "TEXT",
+      "categoryId": "794044198881198090",
+      "name": "🪦┃novas-almas",
+      "topic": ""
+    },
+    {
+      "id": "794044207231926302",
+      "slot": "voz-central",
+      "type": "VOICE",
+      "categoryId": "794044199514406923",
+      "name": "🕯️┃Câmara das Sombras"
+    },
+    {
+      "id": "794044205231112232",
+      "slot": "voz-tribunal",
+      "type": "VOICE",
+      "categoryId": "794044199514406923",
+      "name": "⚰️┃Tribunal da Inquisição"
+    },
+    {
+      "id": "794044203771363328",
+      "slot": "voz-palanque",
+      "type": "VOICE",
+      "categoryId": "794044199514406923",
+      "name": "🔮┃Altar do Ritual"
+    },
+    {
+      "id": "812400426108452865",
+      "slot": "voz-festa",
+      "type": "VOICE",
+      "categoryId": "794044199514406923",
+      "name": "🎃┃Baile dos Vampiros"
+    },
+    {
+      "id": "794044208855777322",
+      "slot": "voz-afk",
+      "type": "VOICE",
+      "categoryId": "794044199514406923",
+      "name": "🧟┃Cemitério AFK"
+    },
+    {
+      "id": "794044213368848396",
+      "slot": "adm-chat",
+      "type": "TEXT",
+      "categoryId": "794044200756051989",
+      "name": "🩸┃pacto-adm",
+      "topic": "Fizer bruxaria errada é fogueira, kkk"
+    },
+    {
+      "id": "794044205848723468",
+      "slot": "adm-memes",
+      "type": "TEXT",
+      "categoryId": "794044200756051989",
+      "name": "👻┃memes-amaldiçoados",
+      "topic": ""
+    },
+    {
+      "id": "794044216933089320",
+      "slot": "adm-voz",
+      "type": "VOICE",
+      "categoryId": "794044200756051989",
+      "name": "🦇┃Covil dos Ademar"
+    }
+  ],
+  "roles": {
+    "hierarchy": [
+      {
+        "id": "794044179029819392",
+        "slot": "tier-1-secretariado",
+        "name": "🎃 Lordes das Sombras",
+        "color": "#FF6B00",
+        "hoist": true
+      },
+      {
+        "id": "845826535810269225",
+        "slot": "tier-2-corte",
+        "name": "💀 Inquisidores Supremos",
+        "color": "#9B59B6",
+        "hoist": true
+      },
+      {
+        "id": "794044189042147340",
+        "slot": "tier-3-diplomatico",
+        "name": "🧛 Emissários Noturnos",
+        "color": "#C0392B",
+        "hoist": true
+      },
+      {
+        "id": "794044191951945778",
+        "slot": "tier-4-assembleia",
+        "name": "👻 Almas da Assembleia",
+        "color": "#2ECC71",
+        "hoist": true
+      }
+    ],
+    "separators": [
+      {
+        "id": "900181759507968031",
+        "position": 45,
+        "name": "─── 🦇 ───"
+      },
+      {
+        "id": "845826404380835841",
+        "position": 39,
+        "name": "─── 🦇 ───"
+      },
+      {
+        "id": "854712377982976010",
+        "position": 30,
+        "name": "─── 🦇 ───"
+      },
+      {
+        "id": "794044188408283217",
+        "position": 6,
+        "name": "─── 🦇 ───"
+      }
+    ]
+  }
+}

@@ -1,0 +1,173 @@
+{
+  "id": "pascoa",
+  "name": "Páscoa (Fantástica Fábrica da ONU)",
+  "description": "Tema de Páscoa com estética pastel, chocolates, coelhos e caça aos ovos dourados.",
+  "guildId": "561721456405381123",
+  "server": {
+    "name": "Organização das Nações Achocolatadas 🐰",
+    "icon": "./assets/icon.png"
+  },
+  "style": {
+    "categoryFrame": "🌸 ─── {name} ─── 🌸",
+    "channelSeparator": "┆",
+    "roleSeparator": "─── 🥚 ───"
+  },
+  "categories": [
+    {
+      "id": "794044198881198090",
+      "slot": "geral",
+      "name": "🌸 ─── Toca Geral ─── 🌸",
+      "position": 0
+    },
+    {
+      "id": "794044199514406923",
+      "slot": "assembleia",
+      "name": "🍫 ─── Fábrica de Cacau ─── 🍫",
+      "position": 4
+    },
+    {
+      "id": "794044200756051989",
+      "slot": "adm",
+      "name": "🥚 ─── Cofre de Ouro ADM ─── 🥚",
+      "position": 10
+    }
+  ],
+  "channels": [
+    {
+      "id": "794044202803658752",
+      "slot": "geral-chat",
+      "type": "TEXT",
+      "categoryId": "794044198881198090",
+      "name": "🥚┆caça-aos-ovos",
+      "topic": "Feliz Páscoa na ONU! Cuidado com a diabetes diplomática 🍫🐰"
+    },
+    {
+      "id": "794044204488720415",
+      "slot": "musica",
+      "type": "TEXT",
+      "categoryId": "794044198881198090",
+      "name": "🎵┆cantiga-do-coelho",
+      "topic": ""
+    },
+    {
+      "id": "794044207596568628",
+      "slot": "boas-vindas",
+      "type": "TEXT",
+      "categoryId": "794044198881198090",
+      "name": "🐣┆novos-coelhinhos",
+      "topic": ""
+    },
+    {
+      "id": "794044207231926302",
+      "slot": "voz-central",
+      "type": "VOICE",
+      "categoryId": "794044199514406923",
+      "name": "🐰┆Toca Central"
+    },
+    {
+      "id": "794044205231112232",
+      "slot": "voz-tribunal",
+      "type": "VOICE",
+      "categoryId": "794044199514406923",
+      "name": "🍫┆Conselho do Cacau"
+    },
+    {
+      "id": "794044203771363328",
+      "slot": "voz-palanque",
+      "type": "VOICE",
+      "categoryId": "794044199514406923",
+      "name": "🥕┆Jardim Central"
+    },
+    {
+      "id": "812400426108452865",
+      "slot": "voz-festa",
+      "type": "VOICE",
+      "categoryId": "794044199514406923",
+      "name": "🍬┆Banquete de Chocolate"
+    },
+    {
+      "id": "794044208855777322",
+      "slot": "voz-afk",
+      "type": "VOICE",
+      "categoryId": "794044199514406923",
+      "name": "🧺┆Coma Glicêmico AFK"
+    },
+    {
+      "id": "794044213368848396",
+      "slot": "adm-chat",
+      "type": "TEXT",
+      "categoryId": "794044200756051989",
+      "name": "🍫┆willy-wonka-adm",
+      "topic": "Roubar ovo de páscoa é ban, kkk"
+    },
+    {
+      "id": "794044205848723468",
+      "slot": "adm-memes",
+      "type": "TEXT",
+      "categoryId": "794044200756051989",
+      "name": "🐰┆memes-recheados",
+      "topic": ""
+    },
+    {
+      "id": "794044216933089320",
+      "slot": "adm-voz",
+      "type": "VOICE",
+      "categoryId": "794044200756051989",
+      "name": "🥚┆Toca dos Ademar"
+    }
+  ],
+  "roles": {
+    "hierarchy": [
+      {
+        "id": "794044179029819392",
+        "slot": "tier-1-secretariado",
+        "name": "🍫 Mestres Chocolatiers",
+        "color": "#A0522D",
+        "hoist": true
+      },
+      {
+        "id": "845826535810269225",
+        "slot": "tier-2-corte",
+        "name": "🥚 Guardiões do Ovo Dourado",
+        "color": "#FFD166",
+        "hoist": true
+      },
+      {
+        "id": "794044189042147340",
+        "slot": "tier-3-diplomatico",
+        "name": "🐰 Embaixadores da Toca",
+        "color": "#FF85A1",
+        "hoist": true
+      },
+      {
+        "id": "794044191951945778",
+        "slot": "tier-4-assembleia",
+        "name": "🐣 Coelhinhos da Assembleia",
+        "color": "#80ED99",
+        "hoist": true
+      }
+    ],
+    "separators": [
+      {
+        "id": "900181759507968031",
+        "position": 45,
+        "name": "─── 🥚 ───"
+      },
+      {
+        "id": "845826404380835841",
+        "position": 39,
+        "name": "─── 🥚 ───"
+      },
+      {
+        "id": "854712377982976010",
+        "position": 30,
+        "name": "─── 🥚 ───"
+      },
+      {
+        "id": "794044188408283217",
+        "position": 6,
+        "name": "─── 🥚 ───"
+      }
+    ]
+  }
+}

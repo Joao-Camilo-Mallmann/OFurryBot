@@ -1,0 +1,173 @@
+{
+  "id": "ano-novo",
+  "name": "Ano Novo (Réveillon da ONU)",
+  "description": "Tema de Virada de Ano com estética de fogos de artifício, champagne e dourado luminoso.",
+  "guildId": "561721456405381123",
+  "server": {
+    "name": "Organização das Nações Renovadas 🎆",
+    "icon": "./assets/icon.png"
+  },
+  "style": {
+    "categoryFrame": "✨ ━━━ {name} ━━━ ✨",
+    "channelSeparator": "╏",
+    "roleSeparator": "━━━ ✨ ━━━"
+  },
+  "categories": [
+    {
+      "id": "794044198881198090",
+      "slot": "geral",
+      "name": "✨ ━━━ Réveillon Geral ━━━ ✨",
+      "position": 0
+    },
+    {
+      "id": "794044199514406923",
+      "slot": "assembleia",
+      "name": "🎆 ━━━ Cúpula da Virada ━━━ 🎆",
+      "position": 4
+    },
+    {
+      "id": "794044200756051989",
+      "slot": "adm",
+      "name": "🥂 ━━━ Camarote ADM ━━━ 🥂",
+      "position": 10
+    }
+  ],
+  "channels": [
+    {
+      "id": "794044202803658752",
+      "slot": "geral-chat",
+      "type": "TEXT",
+      "categoryId": "794044198881198090",
+      "name": "🥂╏brinde-geral",
+      "topic": "Feliz Ano Novo! Metas e promessas que ninguém vai cumprir 🎆🥂"
+    },
+    {
+      "id": "794044204488720415",
+      "slot": "musica",
+      "type": "TEXT",
+      "categoryId": "794044198881198090",
+      "name": "🎶╏playlist-da-virada",
+      "topic": ""
+    },
+    {
+      "id": "794044207596568628",
+      "slot": "boas-vindas",
+      "type": "TEXT",
+      "categoryId": "794044198881198090",
+      "name": "🎇╏novos-ciclos",
+      "topic": ""
+    },
+    {
+      "id": "794044207231926302",
+      "slot": "voz-central",
+      "type": "VOICE",
+      "categoryId": "794044199514406923",
+      "name": "🎆╏Praia de Copacabana"
+    },
+    {
+      "id": "794044205231112232",
+      "slot": "voz-tribunal",
+      "type": "VOICE",
+      "categoryId": "794044199514406923",
+      "name": "⚖️╏Retrospectiva do Ano"
+    },
+    {
+      "id": "794044203771363328",
+      "slot": "voz-palanque",
+      "type": "VOICE",
+      "categoryId": "794044199514406923",
+      "name": "⏳╏Contagem Regressiva"
+    },
+    {
+      "id": "812400426108452865",
+      "slot": "voz-festa",
+      "type": "VOICE",
+      "categoryId": "794044199514406923",
+      "name": "🍾╏After da Virada"
+    },
+    {
+      "id": "794044208855777322",
+      "slot": "voz-afk",
+      "type": "VOICE",
+      "categoryId": "794044199514406923",
+      "name": "🥴╏Ressaca AFK"
+    },
+    {
+      "id": "794044213368848396",
+      "slot": "adm-chat",
+      "type": "TEXT",
+      "categoryId": "794044200756051989",
+      "name": "🍾╏vip-adm",
+      "topic": "Primeiro ban do ano garantido, kkk"
+    },
+    {
+      "id": "794044205848723468",
+      "slot": "adm-memes",
+      "type": "TEXT",
+      "categoryId": "794044200756051989",
+      "name": "📉╏retrospectiva-de-memes",
+      "topic": ""
+    },
+    {
+      "id": "794044216933089320",
+      "slot": "adm-voz",
+      "type": "VOICE",
+      "categoryId": "794044200756051989",
+      "name": "🥂╏Camarote dos Ademar"
+    }
+  ],
+  "roles": {
+    "hierarchy": [
+      {
+        "id": "794044179029819392",
+        "slot": "tier-1-secretariado",
+        "name": "🎆 Soberanos do Novo Ciclo",
+        "color": "#FFD700",
+        "hoist": true
+      },
+      {
+        "id": "845826535810269225",
+        "slot": "tier-2-corte",
+        "name": "🥂 Guardiões do Tempo",
+        "color": "#F4A261",
+        "hoist": true
+      },
+      {
+        "id": "794044189042147340",
+        "slot": "tier-3-diplomatico",
+        "name": "✨ Embaixadores da Virada",
+        "color": "#90E0EF",
+        "hoist": true
+      },
+      {
+        "id": "794044191951945778",
+        "slot": "tier-4-assembleia",
+        "name": "🎇 Cidadãos do Novo Ano",
+        "color": "#E0FBFC",
+        "hoist": true
+      }
+    ],
+    "separators": [
+      {
+        "id": "900181759507968031",
+        "position": 45,
+        "name": "━━━ ✨ ━━━"
+      },
+      {
+        "id": "845826404380835841",
+        "position": 39,
+        "name": "━━━ ✨ ━━━"
+      },
+      {
+        "id": "854712377982976010",
+        "position": 30,
+        "name": "━━━ ✨ ━━━"
+      },
+      {
+        "id": "794044188408283217",
+        "position": 6,
+        "name": "━━━ ✨ ━━━"
+      }
+    ]
+  }
+}
