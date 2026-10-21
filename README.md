@@ -1,6 +1,6 @@
-# FurryBotch 🐾
+# DiscordFurryBot 🐾
 
-FurryBotch é um bot Discord completo com suporte a automações, moderação, comandos slash e integração MCP.
+DiscordFurryBot é um bot Discord completo com suporte a automações, moderação, comandos slash e integração MCP.
 
 ## 🚀 Como Começar
 
