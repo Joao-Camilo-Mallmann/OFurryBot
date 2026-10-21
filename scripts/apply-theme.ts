@@ -125,12 +125,34 @@ async function discordRequest(endpoint: string, method: string, token: string, b
   return res.json();
 }
 
+interface CurrentState {
+  guild: { name: string };
+  channels: Map<string, { name: string; topic?: string | null }>;
+  roles: Map<string, { name: string; color: number; hoist: boolean }>;
+}
+
+// Lê o estado atual do servidor para só enviar PATCH do que realmente mudou
+// (o Discord limita renomear canais a 2x a cada 10 minutos por canal).
+async function fetchCurrentState(guildId: string, token: string): Promise<CurrentState> {
+  const [guild, channels, roles] = await Promise.all([
+    discordRequest(`/guilds/${guildId}`, "GET", token),
+    discordRequest(`/guilds/${guildId}/channels`, "GET", token),
+    discordRequest(`/guilds/${guildId}/roles`, "GET", token),
+  ]);
+  return {
+    guild,
+    channels: new Map(channels.map((c: any) => [c.id, c])),
+    roles: new Map(roles.map((r: any) => [r.id, r])),
+  };
+}
+
 async function main() {
   const args = process.argv.slice(2);
   const isDryRun = args.includes("--dry-run");
   const isList = args.includes("--list");
   const isSchedule = args.includes("--schedule");
   const isAuto = args.includes("--auto");
+  const isForce = args.includes("--force");
   const dateArg = args.find((a) => a.startsWith("--date="))?.split("=")[1];
   const todayMmDd = dateArg || formatMmDd(new Date());
 
@@ -185,6 +207,7 @@ async function main() {
     console.log("  bun run theme:dry <tema>    # Simula as alterações sem tocar no Discord");
     console.log("  bun run theme <tema>        # Aplica o tema manualmente no servidor Discord");
     console.log("  bun run theme:auto          # Aplica automaticamente o tema da semana ou restaura a base-onu");
+    console.log("  bun run theme <tema> --force # Reenvia tudo (inclusive o ícone), mesmo sem diferença");
     return;
   }
 
@@ -211,7 +234,7 @@ async function main() {
     console.log(`📅 Ciclo         : Permanente (Base Oficial - fora de temporada de eventos)`);
   }
   console.log(`🖼️  Ícone Local   : ${iconDataUri ? `${theme.server.icon} (Carregado ✅)` : "Não encontrado / Remoto"}`);
-  console.log(`🧪 Modo          : ${isDryRun ? "SIMULAÇÃO (--dry-run)" : "PRODUÇÃO (Alterando no Discord)"}`);
+  console.log(`🧪 Modo          : ${isDryRun ? "SIMULAÇÃO (--dry-run)" : "PRODUÇÃO (Alterando no Discord)"}${isForce ? " [--force]" : ""}`);
   console.log(`=============================================================\n`);
 
   if (!isDryRun && !token) {
@@ -219,19 +242,36 @@ async function main() {
     process.exit(1);
   }
 
+  // Com token (inclusive em --dry-run) compara com o estado atual; sem token, mostra tudo.
+  const current = token && !isForce ? await fetchCurrentState(guildId, token) : null;
+  const UNCHANGED = " (sem alteração)";
+  let changes = 0;
+
   // 1. Nome e Ícone do Servidor
-  console.log(`[Servidor] Nome -> "${theme.server.name}"${iconDataUri ? ` + Ícone (${theme.server.icon})` : ""}`);
-  if (!isDryRun && token) {
-    await discordRequest(`/guilds/${guildId}`, "PATCH", token, {
-      name: theme.server.name,
-      ...(iconDataUri ? { icon: iconDataUri } : {}),
-    });
+  // O ícone não dá para comparar (a API só devolve um hash), então só é enviado
+  // quando o nome do servidor muda (troca de tema) ou com --force.
+  const serverChanged = !current || current.guild.name !== theme.server.name;
+  const sendIcon = serverChanged && !!iconDataUri;
+  console.log(
+    `[Servidor] Nome -> "${theme.server.name}"${sendIcon ? ` + Ícone (${theme.server.icon})` : ""}${serverChanged ? "" : UNCHANGED}`
+  );
+  if (serverChanged) {
+    changes++;
+    if (!isDryRun && token) {
+      await discordRequest(`/guilds/${guildId}`, "PATCH", token, {
+        name: theme.server.name,
+        ...(sendIcon ? { icon: iconDataUri } : {}),
+      });
+    }
   }
 
   // 2. Categorias
   console.log(`\n[Categorias (${theme.categories.length})]`);
   for (const cat of theme.categories) {
-    console.log(`  📁 (${cat.id}) -> "${cat.name}"`);
+    const changed = !current || current.channels.get(cat.id)?.name !== cat.name;
+    console.log(`  📁 (${cat.id}) -> "${cat.name}"${changed ? "" : UNCHANGED}`);
+    if (!changed) continue;
+    changes++;
     if (!isDryRun && token) {
       await discordRequest(`/channels/${cat.id}`, "PATCH", token, {
         name: cat.name,
@@ -243,7 +283,12 @@ async function main() {
   console.log(`\n[Canais (${theme.channels.length})]`);
   for (const ch of theme.channels) {
     const icon = ch.type === "TEXT" ? "#" : "🔊";
-    console.log(`  ${icon} (${ch.id}) -> "${ch.name}"`);
+    const cur = current?.channels.get(ch.id);
+    const topicChanged = ch.type === "TEXT" && ch.topic !== undefined && (cur?.topic ?? "") !== ch.topic;
+    const changed = !cur || cur.name !== ch.name || topicChanged;
+    console.log(`  ${icon} (${ch.id}) -> "${ch.name}"${changed ? "" : UNCHANGED}`);
+    if (!changed) continue;
+    changes++;
     if (!isDryRun && token) {
       await discordRequest(`/channels/${ch.id}`, "PATCH", token, {
         name: ch.name,
@@ -255,7 +300,11 @@ async function main() {
   // 4. Cargos da Hierarquia Principal
   console.log(`\n[Hierarquia Principal (${theme.roles.hierarchy.length})]`);
   for (const role of theme.roles.hierarchy) {
-    console.log(`  🛡️  (${role.id}) -> "${role.name}" [Cor: ${role.color}]`);
+    const cur = current?.roles.get(role.id);
+    const changed = !cur || cur.name !== role.name || cur.color !== hexToInt(role.color) || cur.hoist !== role.hoist;
+    console.log(`  🛡️  (${role.id}) -> "${role.name}" [Cor: ${role.color}]${changed ? "" : UNCHANGED}`);
+    if (!changed) continue;
+    changes++;
     if (!isDryRun && token) {
       await discordRequest(`/guilds/${guildId}/roles/${role.id}`, "PATCH", token, {
         name: role.name,
@@ -268,7 +317,10 @@ async function main() {
   // 5. Separadores Visuais de Cargos
   console.log(`\n[Separadores de Cargos (${theme.roles.separators.length})]`);
   for (const sep of theme.roles.separators) {
-    console.log(`  ➖ (${sep.id}) -> "${sep.name}"`);
+    const changed = !current || current.roles.get(sep.id)?.name !== sep.name;
+    console.log(`  ➖ (${sep.id}) -> "${sep.name}"${changed ? "" : UNCHANGED}`);
+    if (!changed) continue;
+    changes++;
     if (!isDryRun && token) {
       await discordRequest(`/guilds/${guildId}/roles/${sep.id}`, "PATCH", token, {
         name: sep.name,
@@ -276,7 +328,11 @@ async function main() {
     }
   }
 
-  console.log(`\n✅ Tema "${theme.name}" ${isDryRun ? "simulado" : "aplicado"} com sucesso!`);
+  if (current && changes === 0) {
+    console.log(`\n✅ Tema "${theme.name}" já está ativo, nada a alterar.`);
+    return;
+  }
+  console.log(`\n✅ Tema "${theme.name}" ${isDryRun ? "simulado" : "aplicado"} com sucesso! (${changes} alteração(ões))`);
 }
 
 main().catch((err) => {

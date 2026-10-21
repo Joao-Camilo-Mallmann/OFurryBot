@@ -1,0 +1,26 @@
+name: Tema automático
+
+on:
+  schedule:
+    - cron: "0 6 * * *" # 06:00 UTC = 03:00 em Brasília
+  workflow_dispatch:
+
+concurrency:
+  group: theme-auto
+  cancel-in-progress: false
+
+jobs:
+  apply-theme:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    env:
+      TZ: America/Sao_Paulo
+      DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+      DISCORD_GUILD_ID: ${{ secrets.DISCORD_GUILD_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - run: bun install
+      - run: bun run theme:auto
