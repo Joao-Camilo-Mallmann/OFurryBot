@@ -3,7 +3,14 @@
 Este é o **tema padrão oficial** da **Organização das Nações Unidas (ONU)**. Serve como ponto de restauração sempre que um evento sazonal (Halloween, Natal, Ano Novo, Páscoa) se encerra.
 
 - **Arquivo de Automação**: [`theme.json`](./theme.json)
+- **Logo Estática Oficial**: [`./assets/icon.png`](./assets/icon.png)
+- **Logo Animada (GIF)**: [`./assets/icon.gif`](./assets/icon.gif)
 - **Preview de Referência**: [`../../img/onu-base.png`](../../img/onu-base.png)
+
+<p align="left">
+  <img src="./assets/icon.png" width="140" alt="Logo Base ONU" />
+  <img src="./assets/icon.gif" width="140" alt="Logo Animada Base ONU" />
+</p>
 
 ---
 

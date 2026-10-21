@@ -1,5 +1,5 @@
 import { readFileSync, readdirSync, existsSync } from "node:fs";
-import { join } from "node:path";
+import { join, extname } from "node:path";
 
 interface ThemeConfig {
   id: string;
@@ -9,6 +9,7 @@ interface ThemeConfig {
   server: {
     name: string;
     icon?: string;
+    animatedIcon?: string;
   };
   categories: Array<{
     id: string;
@@ -48,12 +49,23 @@ function hexToInt(hex: string | null | undefined): number {
   return parseInt(hex.replace("#", ""), 16);
 }
 
+function loadIconAsDataUri(themeDir: string, iconRelPath?: string): string | null {
+  if (!iconRelPath || iconRelPath.startsWith("http")) return null;
+  const fullPath = join(themeDir, iconRelPath);
+  if (!existsSync(fullPath)) return null;
+  const ext = extname(fullPath).toLowerCase();
+  const mime = ext === ".gif" ? "image/gif" : ext === ".jpg" || ext === ".jpeg" ? "image/jpeg" : "image/png";
+  const base64 = readFileSync(fullPath).toString("base64");
+  return `data:${mime};base64,${base64}`;
+}
+
 async function discordRequest(endpoint: string, method: string, token: string, body?: unknown) {
   const res = await fetch(`${DISCORD_API}${endpoint}`, {
     method,
     headers: {
       Authorization: `Bot ${token}`,
       "Content-Type": "application/json",
+      "User-Agent": "DiscordBot (https://github.com/Joao-Camilo-Mallmann/OFurryBot, 1.0)",
     },
     body: body ? JSON.stringify(body) : undefined,
   });
@@ -86,7 +98,8 @@ async function main() {
     return;
   }
 
-  const themePath = join(THEMES_DIR, themeArg, "theme.json");
+  const themeDir = join(THEMES_DIR, themeArg);
+  const themePath = join(themeDir, "theme.json");
   if (!existsSync(themePath)) {
     console.error(`❌ Tema "${themeArg}" não encontrado em themes/${themeArg}/theme.json`);
     process.exit(1);
@@ -95,10 +108,12 @@ async function main() {
   const theme: ThemeConfig = JSON.parse(readFileSync(themePath, "utf8"));
   const guildId = process.env.DISCORD_GUILD_ID || theme.guildId;
   const token = process.env.DISCORD_TOKEN;
+  const iconDataUri = loadIconAsDataUri(themeDir, theme.server.icon);
 
   console.log(`\n=============================================================`);
   console.log(`🎨 Aplicando Tema: ${theme.name} (${theme.id})`);
   console.log(`🏛️  Servidor Alvo : ${theme.server.name} (ID: ${guildId})`);
+  console.log(`🖼️  Ícone Local   : ${iconDataUri ? `${theme.server.icon} (Carregado ✅)` : "Não encontrado / Remoto"}`);
   console.log(`🧪 Modo          : ${isDryRun ? "SIMULAÇÃO (--dry-run)" : "PRODUÇÃO (Alterando no Discord)"}`);
   console.log(`=============================================================\n`);
 
@@ -107,11 +122,12 @@ async function main() {
     process.exit(1);
   }
 
-  // 1. Nome do Servidor
-  console.log(`[Servidor] Nome -> "${theme.server.name}"`);
+  // 1. Nome e Ícone do Servidor
+  console.log(`[Servidor] Nome -> "${theme.server.name}"${iconDataUri ? ` + Ícone (${theme.server.icon})` : ""}`);
   if (!isDryRun && token) {
     await discordRequest(`/guilds/${guildId}`, "PATCH", token, {
       name: theme.server.name,
+      ...(iconDataUri ? { icon: iconDataUri } : {}),
     });
   }
 

@@ -1,10 +1,10 @@
 {
   "id": "pascoa",
-  "name": "Páscoa (Fantástica Fábrica da ONU)",
-  "description": "Tema de Páscoa com estética pastel, chocolates, coelhos e caça aos ovos dourados.",
+  "name": "Páscoa (Grande Conselho da Páscoa)",
+  "description": "Tema oficial de Páscoa da ONU com estética de primavera, cacau e renovação.",
   "guildId": "561721456405381123",
   "server": {
-    "name": "Organização das Nações Achocolatadas 🐰",
+    "name": "Organização das Nações da Páscoa 🐰",
     "icon": "./assets/icon.png"
   },
   "style": {
@@ -16,19 +16,19 @@
     {
       "id": "794044198881198090",
       "slot": "geral",
-      "name": "🌸 ─── Toca Geral ─── 🌸",
+      "name": "🌸 ─── Grande Conselho da Páscoa ─── 🌸",
       "position": 0
     },
     {
       "id": "794044199514406923",
       "slot": "assembleia",
-      "name": "🍫 ─── Fábrica de Cacau ─── 🍫",
+      "name": "🥚 ─── Plenário de Primavera ─── 🥚",
       "position": 4
     },
     {
       "id": "794044200756051989",
       "slot": "adm",
-      "name": "🥚 ─── Cofre de Ouro ADM ─── 🥚",
+      "name": "🍫 ─── Alto Comando do Cacau ─── 🍫",
       "position": 10
     }
   ],
@@ -38,15 +38,15 @@
       "slot": "geral-chat",
       "type": "TEXT",
       "categoryId": "794044198881198090",
-      "name": "🥚┆caça-aos-ovos",
-      "topic": "Feliz Páscoa na ONU! Cuidado com a diabetes diplomática 🍫🐰"
+      "name": "🌍┆chat-geral-da-paz",
+      "topic": "Feliz Páscoa no Grande Conselho da ONU! 🐰🥚"
     },
     {
       "id": "794044204488720415",
       "slot": "musica",
       "type": "TEXT",
       "categoryId": "794044198881198090",
-      "name": "🎵┆cantiga-do-coelho",
+      "name": "🎵┆sinfonia-da-páscoa",
       "topic": ""
     },
     {
@@ -54,7 +54,7 @@
       "slot": "boas-vindas",
       "type": "TEXT",
       "categoryId": "794044198881198090",
-      "name": "🐣┆novos-coelhinhos",
+      "name": "👋┆boas-vindas-da-renovação",
       "topic": ""
     },
     {
@@ -62,42 +62,42 @@
       "slot": "voz-central",
       "type": "VOICE",
       "categoryId": "794044199514406923",
-      "name": "🐰┆Toca Central"
+      "name": "🗳️┆Plenário da Primavera"
     },
     {
       "id": "794044205231112232",
       "slot": "voz-tribunal",
       "type": "VOICE",
       "categoryId": "794044199514406923",
-      "name": "🍫┆Conselho do Cacau"
+      "name": "⚖️┆Tribunal do Coelho"
     },
     {
       "id": "794044203771363328",
       "slot": "voz-palanque",
       "type": "VOICE",
       "categoryId": "794044199514406923",
-      "name": "🥕┆Jardim Central"
+      "name": "🕊️┆Mesa Redonda dos Ovos"
     },
     {
       "id": "812400426108452865",
       "slot": "voz-festa",
       "type": "VOICE",
       "categoryId": "794044199514406923",
-      "name": "🍬┆Banquete de Chocolate"
+      "name": "🎉┆Salão de Festa dos Ovos"
     },
     {
       "id": "794044208855777322",
       "slot": "voz-afk",
       "type": "VOICE",
       "categoryId": "794044199514406923",
-      "name": "🧺┆Coma Glicêmico AFK"
+      "name": "💤┆Túmulo dos Inativos da Páscoa"
     },
     {
       "id": "794044213368848396",
       "slot": "adm-chat",
       "type": "TEXT",
       "categoryId": "794044200756051989",
-      "name": "🍫┆willy-wonka-adm",
+      "name": "🔒┆arquivos-secretos-do-conselho",
       "topic": "Roubar ovo de páscoa é ban, kkk"
     },
     {
@@ -105,7 +105,7 @@
       "slot": "adm-memes",
       "type": "TEXT",
       "categoryId": "794044200756051989",
-      "name": "🐰┆memes-recheados",
+      "name": "📉┆memes-chocos",
       "topic": ""
     },
     {
@@ -113,7 +113,7 @@
       "slot": "adm-voz",
       "type": "VOICE",
       "categoryId": "794044200756051989",
-      "name": "🥚┆Toca dos Ademar"
+      "name": "👑┆Cúpula dos Coelhos Supremos"
     }
   ],
   "roles": {
@@ -121,28 +121,28 @@
       {
         "id": "794044179029819392",
         "slot": "tier-1-secretariado",
-        "name": "🍫 Mestres Chocolatiers",
+        "name": "🍫 Alto Comando do Cacau",
         "color": "#A0522D",
         "hoist": true
       },
       {
         "id": "845826535810269225",
         "slot": "tier-2-corte",
-        "name": "🥚 Guardiões do Ovo Dourado",
+        "name": "⚖️ Tribunal do Coelho",
         "color": "#FFD166",
         "hoist": true
       },
       {
         "id": "794044189042147340",
         "slot": "tier-3-diplomatico",
-        "name": "🐰 Embaixadores da Toca",
+        "name": "🕊️ Embaixadores da Primavera",
         "color": "#FF85A1",
         "hoist": true
       },
       {
         "id": "794044191951945778",
         "slot": "tier-4-assembleia",
-        "name": "🐣 Coelhinhos da Assembleia",
+        "name": "🥚 Plenário da Páscoa",
         "color": "#80ED99",
         "hoist": true
       }

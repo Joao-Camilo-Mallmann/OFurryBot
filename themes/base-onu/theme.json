@@ -5,7 +5,8 @@
   "guildId": "561721456405381123",
   "server": {
     "name": "Organização das Nações Unidas",
-    "icon": "https://cdn.discordapp.com/icons/561721456405381123/dba50749a2e628a739d751d8fed9fb9a.png?size=1024"
+    "icon": "./assets/icon.png",
+    "animatedIcon": "./assets/icon.gif"
   },
   "style": {
     "categoryFrame": "▬▬▬▬▬▬  {name}  ▬▬▬▬▬▬",

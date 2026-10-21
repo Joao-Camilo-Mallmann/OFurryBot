@@ -3,6 +3,13 @@
 Tema especial de **Natal (Dezembro)** para a ONU. Utiliza molduras duplas nevadas (`❄️ ═══ ... ═══ ❄️`), separador pontilhado vertical (`┇`) e paleta clássica natalina (vermelho, dourado, pinheiro e esmeralda).
 
 - **Arquivo de Automação**: [`theme.json`](./theme.json)
+- **Logo Oficial de Natal (Estática)**: [`./assets/icon.png`](./assets/icon.png)
+- **Logo Oficial de Natal (Animada GIF)**: [`./assets/icon.gif`](./assets/icon.gif)
+
+<p align="left">
+  <img src="./assets/icon.png" width="140" alt="Logo Natal ONU" />
+  <img src="./assets/icon.gif" width="140" alt="Logo Natal Animada ONU" />
+</p>
 
 ---
 

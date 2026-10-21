@@ -3,6 +3,11 @@
 Tema especial de **Dia das Bruxas (Outubro)** para a ONU. Substitui as barras retas por molduras arredondadas góticas (`╭─── 🎃 ... ───╮`), separador vertical grosso (`┃`) e paleta sombria.
 
 - **Arquivo de Automação**: [`theme.json`](./theme.json)
+- **Logo Oficial de Halloween**: [`./assets/icon.png`](./assets/icon.png)
+
+<p align="left">
+  <img src="./assets/icon.png" width="180" alt="Logo Halloween ONU" />
+</p>
 
 ---
 

@@ -5,7 +5,8 @@
   "guildId": "561721456405381123",
   "server": {
     "name": "Organização das Nações Natalinas 🎄",
-    "icon": "./assets/icon.png"
+    "icon": "./assets/icon.png",
+    "animatedIcon": "./assets/icon.gif"
   },
   "style": {
     "categoryFrame": "❄️ ═══ {name} ═══ ❄️",
