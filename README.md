@@ -1,6 +1,6 @@
-# DiscordFurryBot 🐾
+# OFurryBot 🐾
 
-DiscordFurryBot é um bot Discord completo com suporte a automações, moderação, comandos slash e integração com o **Model Context Protocol (MCP)**.
+OFurryBot é um bot Discord completo com suporte a automações, moderação, comandos slash e integração com o **Model Context Protocol (MCP)**.
 
 ---
 
