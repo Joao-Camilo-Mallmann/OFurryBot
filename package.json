@@ -1,11 +1,14 @@
 {
   "name": "ofurrybot",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Bot e Sistema de Temas Sazonais da Organização das Nações Unidas (ONU) no Discord",
   "type": "module",
   "scripts": {
     "theme": "bun run scripts/apply-theme.ts",
     "theme:dry": "bun run scripts/apply-theme.ts --dry-run",
-    "theme:list": "bun run scripts/apply-theme.ts --list"
+    "theme:list": "bun run scripts/apply-theme.ts --list",
+    "theme:schedule": "bun run scripts/apply-theme.ts --schedule",
+    "theme:auto": "bun run scripts/apply-theme.ts --auto",
+    "theme:auto:dry": "bun run scripts/apply-theme.ts --auto --dry-run"
   }
 }

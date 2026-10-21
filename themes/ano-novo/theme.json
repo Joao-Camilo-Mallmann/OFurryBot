@@ -3,6 +3,18 @@
   "name": "Ano Novo (Réveillon da ONU)",
   "description": "Tema de Virada de Ano com estética de fogos de artifício, champagne e dourado luminoso.",
   "guildId": "561721456405381123",
+  "schedule": {
+    "eventDate": "01-01",
+    "startDate": "12-29",
+    "endDate": "01-18",
+    "durationWeeks": 3,
+    "phases": {
+      "preEventWeek": "12-29 a 12-31 (Pré-Réveillon pós-Natal)",
+      "eventWeek": "01-01 a 01-07 (Semana da Virada)",
+      "postEventWeek": "01-08 a 01-18 (1 semana depois)"
+    },
+    "fallbackTheme": "base-onu"
+  },
   "server": {
     "name": "Organização das Nações Renovadas 🎆",
     "icon": "./assets/icon.png"

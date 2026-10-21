@@ -1,11 +1,25 @@
 import { readFileSync, readdirSync, existsSync } from "node:fs";
 import { join, extname } from "node:path";
 
+interface ThemeSchedule {
+  eventDate: string;
+  startDate: string;
+  endDate: string;
+  durationWeeks: number;
+  phases: {
+    preEventWeek: string;
+    eventWeek: string;
+    postEventWeek: string;
+  };
+  fallbackTheme: string;
+}
+
 interface ThemeConfig {
   id: string;
   name: string;
   description: string;
   guildId: string;
+  schedule?: ThemeSchedule;
   server: {
     name: string;
     icon?: string;
@@ -49,6 +63,40 @@ function hexToInt(hex: string | null | undefined): number {
   return parseInt(hex.replace("#", ""), 16);
 }
 
+function formatMmDd(date: Date): string {
+  const m = String(date.getMonth() + 1).padStart(2, "0");
+  const d = String(date.getDate()).padStart(2, "0");
+  return `${m}-${d}`;
+}
+
+function isMmDdInWindow(mmdd: string, startMmDd: string, endMmDd: string): boolean {
+  if (startMmDd <= endMmDd) {
+    return mmdd >= startMmDd && mmdd <= endMmDd;
+  }
+  // Janela que atravessa a virada do ano (ex: 12-29 até 01-18)
+  return mmdd >= startMmDd || mmdd <= endMmDd;
+}
+
+function loadAllThemes(): ThemeConfig[] {
+  const dirs = readdirSync(THEMES_DIR).filter((d) =>
+    existsSync(join(THEMES_DIR, d, "theme.json"))
+  );
+  return dirs.map((d) =>
+    JSON.parse(readFileSync(join(THEMES_DIR, d, "theme.json"), "utf8"))
+  );
+}
+
+function resolveThemeForDate(mmdd: string): { active: ThemeConfig; isFallback: boolean } {
+  const all = loadAllThemes();
+  for (const theme of all) {
+    if (theme.schedule && isMmDdInWindow(mmdd, theme.schedule.startDate, theme.schedule.endDate)) {
+      return { active: theme, isFallback: false };
+    }
+  }
+  const base = all.find((t) => t.id === "base-onu")!;
+  return { active: base, isFallback: true };
+}
+
 function loadIconAsDataUri(themeDir: string, iconRelPath?: string): string | null {
   if (!iconRelPath || iconRelPath.startsWith("http")) return null;
   const fullPath = join(themeDir, iconRelPath);
@@ -81,20 +129,62 @@ async function main() {
   const args = process.argv.slice(2);
   const isDryRun = args.includes("--dry-run");
   const isList = args.includes("--list");
-  const themeArg = args.find((a) => !a.startsWith("--"));
+  const isSchedule = args.includes("--schedule");
+  const isAuto = args.includes("--auto");
+  const dateArg = args.find((a) => a.startsWith("--date="))?.split("=")[1];
+  const todayMmDd = dateArg || formatMmDd(new Date());
+
+  if (isSchedule) {
+    const all = loadAllThemes().filter((t) => t.schedule);
+    all.sort((a, b) => a.schedule!.eventDate.localeCompare(b.schedule!.eventDate));
+    console.log("📅 Calendário Anual de Eventos Sazonais (Ciclo de 3 Semanas = 1 antes + 1 evento + 1 depois):\n");
+    for (const t of all) {
+      const s = t.schedule!;
+      console.log(`🎯 ${t.name} (${t.id})`);
+      console.log(`   • Data Central  : ${s.eventDate} | Janela Total (${s.durationWeeks} semanas): ${s.startDate} até ${s.endDate}`);
+      console.log(`   • Semana 1 (Pré): ${s.phases.preEventWeek}`);
+      console.log(`   • Semana 2 (Evt): ${s.phases.eventWeek}`);
+      console.log(`   • Semana 3 (Pós): ${s.phases.postEventWeek}`);
+      console.log(`   • Pós-Ciclo     : Retorna automaticamente para "${s.fallbackTheme}"\n`);
+    }
+    const resolved = resolveThemeForDate(todayMmDd);
+    console.log(
+      `📌 Status em [${todayMmDd}]: Tema Ativo = "${resolved.active.id}" (${resolved.active.server.name})${
+        resolved.isFallback ? " [Padrão fora de janela de evento]" : " [Evento de 3 semanas em andamento]"
+      }`
+    );
+    return;
+  }
+
+  let themeArg = args.find((a) => !a.startsWith("--"));
+
+  if (isAuto) {
+    const resolved = resolveThemeForDate(todayMmDd);
+    themeArg = resolved.active.id;
+    console.log(
+      `🤖 [Modo Automático - Data ${todayMmDd}] -> Selecionado: "${themeArg}" (${
+        resolved.isFallback ? "Fora de janela de 3 semanas -> Base ONU" : `Janela ativa: ${resolved.active.schedule?.startDate} a ${resolved.active.schedule?.endDate}`
+      })`
+    );
+  }
 
   if (isList || !themeArg) {
-    const available = readdirSync(THEMES_DIR).filter((d) =>
-      existsSync(join(THEMES_DIR, d, "theme.json"))
-    );
+    const all = loadAllThemes();
+    const resolved = resolveThemeForDate(todayMmDd);
     console.log("🎨 Temas disponíveis no OFurryBot:");
-    for (const t of available) {
-      const data: ThemeConfig = JSON.parse(readFileSync(join(THEMES_DIR, t, "theme.json"), "utf8"));
-      console.log(`  • ${t.padEnd(12)} → ${data.name} (${data.server.name})`);
+    for (const data of all) {
+      const schedInfo = data.schedule
+        ? `[Ciclo 3 sem: ${data.schedule.startDate} a ${data.schedule.endDate}]`
+        : `[Tema Permanente / Fallback]`;
+      const activeMarker = resolved.active.id === data.id ? " 👈 ATIVO HOJE" : "";
+      console.log(`  • ${data.id.padEnd(14)} → ${data.name.padEnd(36)} ${schedInfo}${activeMarker}`);
     }
     console.log("\nUso:");
-    console.log("  bun run theme:dry <tema>   # Simula as alterações sem tocar no Discord");
-    console.log("  bun run theme <tema>       # Aplica o tema no servidor Discord");
+    console.log("  bun run theme:list          # Lista os temas e mostra qual está ativo hoje");
+    console.log("  bun run theme:schedule      # Exibe o calendário completo das 3 semanas de cada evento");
+    console.log("  bun run theme:dry <tema>    # Simula as alterações sem tocar no Discord");
+    console.log("  bun run theme <tema>        # Aplica o tema manualmente no servidor Discord");
+    console.log("  bun run theme:auto          # Aplica automaticamente o tema da semana ou restaura a base-onu");
     return;
   }
 
@@ -113,6 +203,13 @@ async function main() {
   console.log(`\n=============================================================`);
   console.log(`🎨 Aplicando Tema: ${theme.name} (${theme.id})`);
   console.log(`🏛️  Servidor Alvo : ${theme.server.name} (ID: ${guildId})`);
+  if (theme.schedule) {
+    console.log(
+      `📅 Ciclo 3 Sem.  : ${theme.schedule.startDate} até ${theme.schedule.endDate} (Evento: ${theme.schedule.eventDate}) -> Volta p/ ${theme.schedule.fallbackTheme}`
+    );
+  } else {
+    console.log(`📅 Ciclo         : Permanente (Base Oficial - fora de temporada de eventos)`);
+  }
   console.log(`🖼️  Ícone Local   : ${iconDataUri ? `${theme.server.icon} (Carregado ✅)` : "Não encontrado / Remoto"}`);
   console.log(`🧪 Modo          : ${isDryRun ? "SIMULAÇÃO (--dry-run)" : "PRODUÇÃO (Alterando no Discord)"}`);
   console.log(`=============================================================\n`);

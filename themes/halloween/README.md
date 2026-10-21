@@ -4,6 +4,7 @@ Tema especial de **Dia das Bruxas (Outubro)** para a ONU. Substitui as barras re
 
 - **Arquivo de Automação**: [`theme.json`](./theme.json)
 - **Logo Oficial de Halloween**: [`./assets/icon.png`](./assets/icon.png)
+- **Ciclo de Duração (3 Semanas)**: `17/10` a `06/11` (1 semana antes + semana de Halloween `31/10` + 1 semana depois → retorna para `base-onu` em `07/11`).
 
 <p align="left">
   <img src="./assets/icon.png" width="180" alt="Logo Halloween ONU" />

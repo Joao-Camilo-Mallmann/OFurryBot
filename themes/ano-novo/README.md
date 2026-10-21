@@ -3,6 +3,12 @@
 Tema especial de **Réveillon / Ano Novo (Fim de Dezembro / Janeiro)** para a ONU. Utiliza traços contínuos luminosos (`✨ ━━━ ... ━━━ ✨`), separador duplo tracejado (`╏`) e paleta de ouro champagne, âmbar e prata.
 
 - **Arquivo de Automação**: [`theme.json`](./theme.json)
+- **Logo Oficial de Ano Novo**: [`./assets/icon.png`](./assets/icon.png)
+- **Ciclo de Duração (3 Semanas)**: `29/12` a `18/01` (Pré-Réveillon pós-Natal + semana da Virada `01/01` + 1 semana depois → retorna para `base-onu` em `19/01`).
+
+<p align="left">
+  <img src="./assets/icon.png" width="180" alt="Logo Ano Novo ONU" />
+</p>
 
 ---
 

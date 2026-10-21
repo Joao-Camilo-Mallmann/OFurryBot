@@ -3,6 +3,18 @@
   "name": "Halloween (Noite das Bruxas)",
   "description": "Tema sombrio e assombrado de Halloween com estética gótica, abóboras e necromancia diplomática.",
   "guildId": "561721456405381123",
+  "schedule": {
+    "eventDate": "10-31",
+    "startDate": "10-17",
+    "endDate": "11-06",
+    "durationWeeks": 3,
+    "phases": {
+      "preEventWeek": "10-17 a 10-23 (1 semana antes)",
+      "eventWeek": "10-24 a 10-31 (Semana de Halloween)",
+      "postEventWeek": "11-01 a 11-06 (1 semana depois)"
+    },
+    "fallbackTheme": "base-onu"
+  },
   "server": {
     "name": "Organização das Nações Assombradas 🎃",
     "icon": "./assets/icon.png"

@@ -1,0 +1,185 @@
+{
+  "id": "festa-junina",
+  "name": "Festa Junina (Arraial da ONU)",
+  "description": "Tema de São João e Festa Junina com estética de arraial, fogueira, bandeirinhas, milho e sanfona diplomática.",
+  "guildId": "561721456405381123",
+  "schedule": {
+    "eventDate": "06-24",
+    "startDate": "06-10",
+    "endDate": "06-30",
+    "durationWeeks": 3,
+    "phases": {
+      "preEventWeek": "06-10 a 06-16 (1 semana antes)",
+      "eventWeek": "06-17 a 06-23 (Semana de São João)",
+      "postEventWeek": "06-24 a 06-30 (1 semana depois)"
+    },
+    "fallbackTheme": "base-onu"
+  },
+  "server": {
+    "name": "Organização das Nações Juninas 🔥",
+    "icon": "./assets/icon.png"
+  },
+  "style": {
+    "categoryFrame": "🌽 ─── {name} ─── 🌽",
+    "channelSeparator": "⸾",
+    "roleSeparator": "─── 🔥 ───"
+  },
+  "categories": [
+    {
+      "id": "794044198881198090",
+      "slot": "geral",
+      "name": "🌽 ─── Arraial Geral ─── 🌽",
+      "position": 0
+    },
+    {
+      "id": "794044199514406923",
+      "slot": "assembleia",
+      "name": "🔥 ─── Quadrilha Suprema ─── 🔥",
+      "position": 4
+    },
+    {
+      "id": "794044200756051989",
+      "slot": "adm",
+      "name": "🤠 ─── Barraca ADM ─── 🤠",
+      "position": 10
+    }
+  ],
+  "channels": [
+    {
+      "id": "794044202803658752",
+      "slot": "geral-chat",
+      "type": "TEXT",
+      "categoryId": "794044198881198090",
+      "name": "🔥⸾prosa-na-fogueira",
+      "topic": "Anarriê! Olha a cobra na Assembleia da ONU! É mentira! 🌽🔥🤠"
+    },
+    {
+      "id": "794044204488720415",
+      "slot": "musica",
+      "type": "TEXT",
+      "categoryId": "794044198881198090",
+      "name": "🪗⸾forrozinho-e-sanfona",
+      "topic": ""
+    },
+    {
+      "id": "794044207596568628",
+      "slot": "boas-vindas",
+      "type": "TEXT",
+      "categoryId": "794044198881198090",
+      "name": "🤠⸾novos-compadres",
+      "topic": ""
+    },
+    {
+      "id": "794044207231926302",
+      "slot": "voz-central",
+      "type": "VOICE",
+      "categoryId": "794044199514406923",
+      "name": "🔥⸾Roda da Fogueira"
+    },
+    {
+      "id": "794044205231112232",
+      "slot": "voz-tribunal",
+      "type": "VOICE",
+      "categoryId": "794044199514406923",
+      "name": "🐍⸾Cadeia do Arraial"
+    },
+    {
+      "id": "794044203771363328",
+      "slot": "voz-palanque",
+      "type": "VOICE",
+      "categoryId": "794044199514406923",
+      "name": "💌⸾Correio Elegante"
+    },
+    {
+      "id": "812400426108452865",
+      "slot": "voz-festa",
+      "type": "VOICE",
+      "categoryId": "794044199514406923",
+      "name": "🍷⸾Barraca do Quentão"
+    },
+    {
+      "id": "794044208855777322",
+      "slot": "voz-afk",
+      "type": "VOICE",
+      "categoryId": "794044199514406923",
+      "name": "🌾⸾Cochilo no Paiol AFK"
+    },
+    {
+      "id": "794044213368848396",
+      "slot": "adm-chat",
+      "type": "TEXT",
+      "categoryId": "794044200756051989",
+      "name": "🤠⸾delegacia-do-arraial",
+      "topic": "Pular a fogueira errado dá cadeia e ban, sô! kkk"
+    },
+    {
+      "id": "794044205848723468",
+      "slot": "adm-memes",
+      "type": "TEXT",
+      "categoryId": "794044200756051989",
+      "name": "🌽⸾memes-de-pamonha",
+      "topic": ""
+    },
+    {
+      "id": "794044216933089320",
+      "slot": "adm-voz",
+      "type": "VOICE",
+      "categoryId": "794044200756051989",
+      "name": "🪗⸾Paiol dos Ademar"
+    }
+  ],
+  "roles": {
+    "hierarchy": [
+      {
+        "id": "794044179029819392",
+        "slot": "tier-1-secretariado",
+        "name": "🔥 Coronéis do Arraial",
+        "color": "#E65100",
+        "hoist": true
+      },
+      {
+        "id": "845826535810269225",
+        "slot": "tier-2-corte",
+        "name": "🤠 Xerifes da Quadrilha",
+        "color": "#FBC02D",
+        "hoist": true
+      },
+      {
+        "id": "794044189042147340",
+        "slot": "tier-3-diplomatico",
+        "name": "🪗 Sanfoneiros Diplomáticos",
+        "color": "#D32F2F",
+        "hoist": true
+      },
+      {
+        "id": "794044191951945778",
+        "slot": "tier-4-assembleia",
+        "name": "🌽 Caipiras da Assembleia",
+        "color": "#7CB342",
+        "hoist": true
+      }
+    ],
+    "separators": [
+      {
+        "id": "900181759507968031",
+        "position": 45,
+        "name": "─── 🔥 ───"
+      },
+      {
+        "id": "845826404380835841",
+        "position": 39,
+        "name": "─── 🔥 ───"
+      },
+      {
+        "id": "854712377982976010",
+        "position": 30,
+        "name": "─── 🔥 ───"
+      },
+      {
+        "id": "794044188408283217",
+        "position": 6,
+        "name": "─── 🔥 ───"
+      }
+    ]
+  }
+}

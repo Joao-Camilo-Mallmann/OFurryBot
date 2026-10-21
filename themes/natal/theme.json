@@ -3,6 +3,18 @@
   "name": "Natal (Polo Norte da ONU)",
   "description": "Tema natalino aconchegante e festivo com estética de neve, pinheiros e luzes de Natal.",
   "guildId": "561721456405381123",
+  "schedule": {
+    "eventDate": "12-25",
+    "startDate": "12-08",
+    "endDate": "12-28",
+    "durationWeeks": 3,
+    "phases": {
+      "preEventWeek": "12-08 a 12-14 (1 semana antes)",
+      "eventWeek": "12-15 a 12-25 (Semana de Natal)",
+      "postEventWeek": "12-26 a 12-28 (Pós-Natal antes do Réveillon)"
+    },
+    "fallbackTheme": "base-onu"
+  },
   "server": {
     "name": "Organização das Nações Natalinas 🎄",
     "icon": "./assets/icon.png",

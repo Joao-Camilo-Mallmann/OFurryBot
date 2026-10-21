@@ -3,6 +3,18 @@
   "name": "Páscoa (Grande Conselho da Páscoa)",
   "description": "Tema oficial de Páscoa da ONU com estética de primavera, cacau e renovação.",
   "guildId": "561721456405381123",
+  "schedule": {
+    "eventDate": "04-19",
+    "startDate": "04-07",
+    "endDate": "04-27",
+    "durationWeeks": 3,
+    "phases": {
+      "preEventWeek": "04-07 a 04-13 (1 semana antes)",
+      "eventWeek": "04-14 a 04-20 (Semana da Páscoa)",
+      "postEventWeek": "04-21 a 04-27 (1 semana depois)"
+    },
+    "fallbackTheme": "base-onu"
+  },
   "server": {
     "name": "Organização das Nações da Páscoa 🐰",
     "icon": "./assets/icon.png"

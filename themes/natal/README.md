@@ -5,6 +5,7 @@ Tema especial de **Natal (Dezembro)** para a ONU. Utiliza molduras duplas nevada
 - **Arquivo de Automação**: [`theme.json`](./theme.json)
 - **Logo Oficial de Natal (Estática)**: [`./assets/icon.png`](./assets/icon.png)
 - **Logo Oficial de Natal (Animada GIF)**: [`./assets/icon.gif`](./assets/icon.gif)
+- **Ciclo de Duração (3 Semanas)**: `08/12` a `28/12` (1 semana antes + semana de Natal `25/12` + pós-Natal antes do Réveillon).
 
 <p align="left">
   <img src="./assets/icon.png" width="140" alt="Logo Natal ONU" />

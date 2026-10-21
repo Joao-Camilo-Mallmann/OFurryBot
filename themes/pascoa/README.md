@@ -4,6 +4,7 @@ Tema especial de **Páscoa (Março / Abril)** para a ONU, baseado exatamente na 
 
 - **Arquivo de Automação**: [`theme.json`](./theme.json)
 - **Logo Oficial de Páscoa**: [`./assets/icon.png`](./assets/icon.png)
+- **Ciclo de Duração (3 Semanas)**: `07/04` a `27/04` (1 semana antes + semana da Páscoa + 1 semana depois → retorna para `base-onu` em `28/04`).
 
 <p align="left">
   <img src="./assets/icon.png" width="180" alt="Logo Páscoa ONU" />

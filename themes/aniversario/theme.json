@@ -1,0 +1,185 @@
+{
+  "id": "aniversario",
+  "name": "Aniversário da ONU (Gala de Fundação)",
+  "description": "Tema comemorativo do Aniversário de Fundação da ONU no Discord (31 de Março de 2019), com estética de gala real, coroas douradas e bolo de aniversário.",
+  "guildId": "561721456405381123",
+  "schedule": {
+    "eventDate": "03-31",
+    "startDate": "03-17",
+    "endDate": "04-06",
+    "durationWeeks": 3,
+    "phases": {
+      "preEventWeek": "03-17 a 03-23 (1 semana antes)",
+      "eventWeek": "03-24 a 03-30 (Semana do Aniversário 31/03)",
+      "postEventWeek": "03-31 a 04-06 (1 semana depois)"
+    },
+    "fallbackTheme": "base-onu"
+  },
+  "server": {
+    "name": "Organização das Nações em Gala 🎂",
+    "icon": "./assets/icon.png"
+  },
+  "style": {
+    "categoryFrame": "👑 ═══ {name} ═══ 👑",
+    "channelSeparator": "║",
+    "roleSeparator": "═══ 🎂 ═══"
+  },
+  "categories": [
+    {
+      "id": "794044198881198090",
+      "slot": "geral",
+      "name": "🎂 ═══ Salão Real da ONU ═══ 🎂",
+      "position": 0
+    },
+    {
+      "id": "794044199514406923",
+      "slot": "assembleia",
+      "name": "👑 ═══ Cúpula de Aniversário ═══ 👑",
+      "position": 4
+    },
+    {
+      "id": "794044200756051989",
+      "slot": "adm",
+      "name": "🥂 ═══ Conselho Fundador ADM ═══ 🥂",
+      "position": 10
+    }
+  ],
+  "channels": [
+    {
+      "id": "794044202803658752",
+      "slot": "geral-chat",
+      "type": "TEXT",
+      "categoryId": "794044198881198090",
+      "name": "🎂║parabens-geral",
+      "topic": "Parabéns pra ONU! Desde 31/03/2019 mantendo a diplomacia (e o caos) mundial! 🎂🥂👑"
+    },
+    {
+      "id": "794044204488720415",
+      "slot": "musica",
+      "type": "TEXT",
+      "categoryId": "794044198881198090",
+      "name": "🎺║hino-da-gala",
+      "topic": ""
+    },
+    {
+      "id": "794044207596568628",
+      "slot": "boas-vindas",
+      "type": "TEXT",
+      "categoryId": "794044198881198090",
+      "name": "🎈║convidados-de-honra",
+      "topic": ""
+    },
+    {
+      "id": "794044207231926302",
+      "slot": "voz-central",
+      "type": "VOICE",
+      "categoryId": "794044199514406923",
+      "name": "👑║Palco do Aniversário"
+    },
+    {
+      "id": "794044205231112232",
+      "slot": "voz-tribunal",
+      "type": "VOICE",
+      "categoryId": "794044199514406923",
+      "name": "🏛️║Corte Histórica da ONU"
+    },
+    {
+      "id": "794044203771363328",
+      "slot": "voz-palanque",
+      "type": "VOICE",
+      "categoryId": "794044199514406923",
+      "name": "🎙️║Discurso de Fundação"
+    },
+    {
+      "id": "812400426108452865",
+      "slot": "voz-festa",
+      "type": "VOICE",
+      "categoryId": "794044199514406923",
+      "name": "🍰║Hora do Bolo"
+    },
+    {
+      "id": "794044208855777322",
+      "slot": "voz-afk",
+      "type": "VOICE",
+      "categoryId": "794044199514406923",
+      "name": "🎁║Coma de Brigadeiro AFK"
+    },
+    {
+      "id": "794044213368848396",
+      "slot": "adm-chat",
+      "type": "TEXT",
+      "categoryId": "794044200756051989",
+      "name": "👑║cupula-fundadora-adm",
+      "topic": "Assoprar a vela antes da hora é ban diplomático, kkk"
+    },
+    {
+      "id": "794044205848723468",
+      "slot": "adm-memes",
+      "type": "TEXT",
+      "categoryId": "794044200756051989",
+      "name": "📸║capsula-de-memes",
+      "topic": ""
+    },
+    {
+      "id": "794044216933089320",
+      "slot": "adm-voz",
+      "type": "VOICE",
+      "categoryId": "794044200756051989",
+      "name": "🥂║Salão VIP dos Ademar"
+    }
+  ],
+  "roles": {
+    "hierarchy": [
+      {
+        "id": "794044179029819392",
+        "slot": "tier-1-secretariado",
+        "name": "👑 Fundadores Supremos",
+        "color": "#FFD700",
+        "hoist": true
+      },
+      {
+        "id": "845826535810269225",
+        "slot": "tier-2-corte",
+        "name": "🎂 Guardiões da Coroa",
+        "color": "#3B82F6",
+        "hoist": true
+      },
+      {
+        "id": "794044189042147340",
+        "slot": "tier-3-diplomatico",
+        "name": "🥂 Embaixadores de Gala",
+        "color": "#F43F5E",
+        "hoist": true
+      },
+      {
+        "id": "794044191951945778",
+        "slot": "tier-4-assembleia",
+        "name": "🎈 Convidados da Assembleia",
+        "color": "#38BDF8",
+        "hoist": true
+      }
+    ],
+    "separators": [
+      {
+        "id": "900181759507968031",
+        "position": 45,
+        "name": "═══ 🎂 ═══"
+      },
+      {
+        "id": "845826404380835841",
+        "position": 39,
+        "name": "═══ 🎂 ═══"
+      },
+      {
+        "id": "854712377982976010",
+        "position": 30,
+        "name": "═══ 🎂 ═══"
+      },
+      {
+        "id": "794044188408283217",
+        "position": 6,
+        "name": "═══ 🎂 ═══"
+      }
+    ]
+  }
+}
